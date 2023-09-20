@@ -1,8 +1,10 @@
 package com.ucatolica.easyevent.easyevent.persitencia;
 
 import jakarta.persistence.*;
+import org.springframework.data.jpa.repository.Query;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "proveedores")
@@ -70,5 +72,10 @@ public class Proveedor implements Serializable {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    @Query(value = "SELECT * FROM proveedores", nativeQuery = true)
+    List<Proveedor> findAllNative() {
+        return null;
     }
 }
