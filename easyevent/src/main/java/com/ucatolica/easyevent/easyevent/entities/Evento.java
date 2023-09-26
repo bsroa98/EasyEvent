@@ -1,12 +1,19 @@
 package com.ucatolica.easyevent.easyevent.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "eventos")
 public class Evento {
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "idproveedor", nullable = false)
+    private Proveedor idproveedor;
+
     public Evento(Integer id, String nombreEvento, String descripcion, String tipoEvento, Integer edadRecomendada, BigDecimal precio, String actividades, String ubicacion, String georeferencia, String categoria, Integer capacidad, String comida, String estado) {
         this.id = id;
         this.nombreEvento = nombreEvento;
@@ -66,6 +73,14 @@ public class Evento {
 
     @Column(name = "estado", length = Integer.MAX_VALUE)
     private String estado;
+
+    public Proveedor getIdproveedor() {
+        return idproveedor;
+    }
+
+    public void setIdproveedor(Proveedor idproveedor) {
+        this.idproveedor = idproveedor;
+    }
 
     public Integer getId() {
         return id;

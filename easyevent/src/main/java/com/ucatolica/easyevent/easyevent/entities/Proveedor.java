@@ -3,11 +3,19 @@ package com.ucatolica.easyevent.easyevent.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "proveedores")
 
 public class Proveedor implements Serializable {
+
+    @Column(name = "pass")
+    private String pass1;
+
+    @OneToMany(mappedBy = "idproveedor")
+    private Set<Evento> eventos = new LinkedHashSet<>();
 
     public Proveedor() {
     }
@@ -30,6 +38,22 @@ public class Proveedor implements Serializable {
     private String correo;
     @Column (name = "contraseña")
     private String pass;
+
+    public Set<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(Set<Evento> eventos) {
+        this.eventos = eventos;
+    }
+
+    public String getPass1() {
+        return pass1;
+    }
+
+    public void setPass1(String pass1) {
+        this.pass1 = pass1;
+    }
 
 
     public Integer getId() {
