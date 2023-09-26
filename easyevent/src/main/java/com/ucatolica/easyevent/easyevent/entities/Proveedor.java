@@ -12,9 +12,9 @@ public class Proveedor implements Serializable {
     public Proveedor() {
     }
 
-    public Proveedor(Integer id, String nombreempresa, Integer nit, String correo, String pass) {
+    public Proveedor(Integer id, String nombreEmpresa, Integer nit, String correo, String pass) {
         this.id = id;
-        this.nombreempresa = nombreempresa;
+        this.nombreEmpresa = nombreEmpresa;
         this.nit = nit;
         this.correo = correo;
         this.pass = pass;
@@ -25,7 +25,7 @@ public class Proveedor implements Serializable {
     @Column (name = "proveedor_id")
     private Integer id;
     @Column (name = "nombre_empresa")
-    private String nombreempresa;
+    private String nombreEmpresa;
     private Integer nit;
     private String correo;
     @Column (name = "contraseña")
@@ -40,12 +40,12 @@ public class Proveedor implements Serializable {
         this.id = id;
     }
 
-    public String getNombreempresa() {
-        return nombreempresa;
+    public String getNombreEmpresa() {
+        return nombreEmpresa;
     }
 
-    public void setNombreempresa(String nombreempresa) {
-        this.nombreempresa = nombreempresa;
+    public void setNombreEmpresa(String nombreempresa) {
+        this.nombreEmpresa = nombreEmpresa;
     }
 
     public Integer getNit() {
