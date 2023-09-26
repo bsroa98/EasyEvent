@@ -1,4 +1,4 @@
-package com.ucatolica.easyevent.easyevent.persitencia;
+package com.ucatolica.easyevent.easyevent.entities;
 
 import jakarta.persistence.*;
 
@@ -7,6 +7,25 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "eventos")
 public class Evento {
+    public Evento(Integer id, String nombreEvento, String descripcion, String tipoEvento, Integer edadRecomendada, BigDecimal precio, String actividades, String ubicacion, String georeferencia, String categoria, Integer capacidad, String comida, String estado) {
+        this.id = id;
+        this.nombreEvento = nombreEvento;
+        this.descripcion = descripcion;
+        this.tipoEvento = tipoEvento;
+        this.edadRecomendada = edadRecomendada;
+        this.precio = precio;
+        this.actividades = actividades;
+        this.ubicacion = ubicacion;
+        this.georeferencia = georeferencia;
+        this.categoria = categoria;
+        this.capacidad = capacidad;
+        this.comida = comida;
+        this.estado = estado;
+    }
+
+    public Evento() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "evento_id", nullable = false)

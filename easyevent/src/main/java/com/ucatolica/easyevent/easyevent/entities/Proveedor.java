@@ -1,4 +1,4 @@
-package com.ucatolica.easyevent.easyevent.persitencia;
+package com.ucatolica.easyevent.easyevent.entities;
 
 import jakarta.persistence.*;
 
