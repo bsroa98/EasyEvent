@@ -1,10 +1,10 @@
-package com.ucatolica.easyevent.easyevent.persitencia;
+package com.ucatolica.easyevent.easyevent.entities;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "usuarios")
-public class Usuario {
+@Table(name = "clientes")
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuario_id", nullable = false)
@@ -16,8 +16,8 @@ public class Usuario {
     @Column(name = "correo", length = 100)
     private String correo;
 
-    @Column(name = "\"contraseña\"", length = 100)
-    private String contraseña;
+    @Column(name = "pass", length = 100)
+    private String pass;
 
     @Column(name = "numero_identificacion", length = 20)
     private String numeroIdentificacion;
@@ -49,12 +49,12 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getPass() {
+        return pass;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public String getNumeroIdentificacion() {
