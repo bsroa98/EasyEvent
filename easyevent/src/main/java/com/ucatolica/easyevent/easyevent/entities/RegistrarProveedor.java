@@ -1,10 +1,9 @@
 package com.ucatolica.easyevent.easyevent.entities;
-
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "clientes")
-public class Cliente {
+@Table(name = "registrarProveedor")
+public class RegistrarProveedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuario_id", nullable = false)
@@ -74,4 +73,3 @@ public class Cliente {
     }
 
 }
-
