@@ -1,5 +1,6 @@
 package com.ucatolica.easyevent.easyevent.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ public class Proveedor implements Serializable {
     @Column(name = "pass")
     private String pass1;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "idproveedor")
     private Set<Evento> eventos = new LinkedHashSet<>();
 
