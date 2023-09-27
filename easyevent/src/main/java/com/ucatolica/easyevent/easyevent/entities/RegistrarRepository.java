@@ -8,11 +8,11 @@ import java.util.Optional;
 @Repository
 public class RegistrarRepository {
     @Autowired
-    private RegistrarRepository registrarRepository;
+    private RegistrarRepository registrarCrudRepository;
 
-    public List<Registrar> getAll(){return (List<Registrar>) registrarRepository.findAll();}
+    public List<Registrar> getAll(){return (List<Registrar>) registrarCrudRepository.findAll();}
 
-    public Registrar saveRegistrar(Registrar registrar){return registrarRepository.save(registrar);}
+    public Registrar saveRegistrar(Registrar registrar){return registrarCrudRepository.save(registrar);}
 
 
 }

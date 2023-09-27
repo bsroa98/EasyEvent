@@ -9,11 +9,19 @@ import java.util.Optional;
 @Repository
 public class RegistrarProveedorRepository {
     @Autowired
-    private RegistrarProveedorRepository registrarProveedorRepository;
+    private RegistrarProveedorRepository registrarCrudRepositoryP;
 
-    public List<RegistrarProveedor> getAll(){return (List<RegistrarProveedor>) registrarProveedorRepository.findAll();}
+    public List<RegistrarProveedor> getAll(){return (List<RegistrarProveedor>) registrarCrudRepositoryP.findAll();}
 
-    public Registrar saveRegistrarProveedor(Registrar registrar){return registrarProveedorRepository.save(registrar);}
+    private Object findAll() {
+        return null;
+    }
+
+    public Registrar saveRegistrarProveedor(Registrar registrar){return registrarCrudRepositoryP.save(registrar);}
+
+    private Registrar save(Registrar registrar) {
+
+    }
 
 
 }
