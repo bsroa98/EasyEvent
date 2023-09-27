@@ -1,37 +1,35 @@
 package com.ucatolica.easyevent.easyevent.controller;
 
 import com.ucatolica.easyevent.easyevent.entities.Evento;
-import com.ucatolica.easyevent.easyevent.entities.EventoCrudRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ucatolica.easyevent.easyevent.entities.EventoRepository;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("eventos")
 public class EventController {
 
-    public EventController(EventoCrudRepository eventoRepository) {
+    public EventController(EventoRepository eventoRepository) {
         this.eventoRepository = eventoRepository;
     }
 
-    private EventoCrudRepository eventoRepository;
+    private EventoRepository eventoRepository;
 
 
-    @GetMapping("/eventos")
+    @GetMapping("/GET")
     public List<Evento> getAll(){
-        List<Evento> list = new ArrayList();
-        Iterator<Evento> iterator = eventoRepository.findAll().iterator();
-        while(iterator.hasNext()){
-            list.add(iterator.next());
-        }
-        return list;
+       return eventoRepository.getAll();
     }
 
-    @GetMapping("/nya")
-    public Optional<Evento> nya(){
-        return eventoRepository.findById(10);
+    @GetMapping("/GETBYID/{id}")
+    public Optional<Evento> getEvento(@PathVariable int id){
+        return eventoRepository.getEvento(id);
     }
+
+    //@PostMapping("/SAVE")
+
+
+
 }

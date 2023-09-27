@@ -1,5 +1,6 @@
 package com.ucatolica.easyevent.easyevent.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -12,6 +13,7 @@ public class Evento {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "idproveedor", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Proveedor idproveedor;
 
     public Evento(Integer id, String nombreEvento, String descripcion, String tipoEvento, Integer edadRecomendada, BigDecimal precio, String actividades, String ubicacion, String georeferencia, String categoria, Integer capacidad, String comida, String estado) {
@@ -185,5 +187,4 @@ public class Evento {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
 }
