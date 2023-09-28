@@ -20,7 +20,7 @@ public class RegistrarProveedorRepository {
     public Registrar saveRegistrarProveedor(Registrar registrar){return registrarCrudRepositoryP.save(registrar);}
 
     private Registrar save(Registrar registrar) {
-
+        return null;
     }
 
 

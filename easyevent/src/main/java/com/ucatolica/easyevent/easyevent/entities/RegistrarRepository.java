@@ -14,6 +14,6 @@ public class RegistrarRepository {
 
     public Registrar saveRegistrar(Registrar registrar){return registrarCrudRepository.save(registrar);}
 
-
+ 
 }
 
