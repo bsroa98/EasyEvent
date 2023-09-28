@@ -1,5 +1,6 @@
 package com.ucatolica.easyevent.easyevent.offeruser;
 
+import jakarta.persistence.*;
 @Entity
 @Table(name = "ofertaUsuario")
 public class offerUser {

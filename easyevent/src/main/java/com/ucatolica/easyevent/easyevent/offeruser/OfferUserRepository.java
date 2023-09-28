@@ -13,19 +13,15 @@ public class OfferUserRepository {
     private OfferUserRepository offerUserRepository;
 
     public List<offerUser> getAll(){
-        return (List<offerUser>) offerUserRepository.findAll();
+        return (List<offerUser>) offerUserRepository.getAll();
     }
 
-    public Optional<offerUser> getofferUser(String nombreContacto){
-        return offerUserRepository.findById(nombreContacto);
+    public Optional<offerUser> getOfferUser(String nombreContacto){
+        return offerUserRepository.getOfferUser(nombreContacto);
     }
 
     public offerUser saveofferUser(offerUser offeruser){
-        return offerUserRepository.save(offeruser);
-    }
-    
-    public void deleteofferUser(offerUser offeruser){
-        offerUserRepository.delete(offeruser);
+        return offerUserRepository.saveofferUser(offeruser);
     }
 
 }
