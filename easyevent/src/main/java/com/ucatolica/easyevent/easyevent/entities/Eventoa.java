@@ -1,4 +1,5 @@
 package com.ucatolica.easyevent.easyevent.entities;
+import com.ucatolica.easyevent.easyevent.entities.Eventoa;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,8 +56,10 @@ class EventQuoter {
     public Eventoa getEvent(String name) {
         return eventoa.get(name);
     }
-}
-public class EventoaQuotingApp {
+
+
+
+
     public static void main(String[] args) {
         EventQuoter quoter = new EventQuoter();
 
@@ -65,11 +68,16 @@ public class EventoaQuotingApp {
         quoter.addEventoa("Evento 2", "Fecha 2", "Ubicación 2", "Menú 2", "Decoración 2");
 
         // Personalizar un evento
-        Eventoa eventoa = quoter.getEvent("Evento 1");
+        Eventoa eventoa = quoter.getEventoa("Evento 1");
         eventoa.setCustomization("date", "Nueva Fecha");
         eventoa.setCustomization("menu", "Nuevo Menú");
 
         // Restaurar valores predeterminados
         eventoa.resetToDefault();
     }
-}
+
+    private Eventoa getEventoa(String s) {
+
+        return null;
+    }
+      }
