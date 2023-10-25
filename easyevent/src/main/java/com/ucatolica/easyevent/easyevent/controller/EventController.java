@@ -1,8 +1,11 @@
 package com.ucatolica.easyevent.easyevent.controller;
 
 import com.ucatolica.easyevent.easyevent.entities.Evento;
-import com.ucatolica.easyevent.easyevent.entities.EventoRepository;
+import com.ucatolica.easyevent.easyevent.entities.Proveedor;
+import com.ucatolica.easyevent.easyevent.services.EmailService;
 import com.ucatolica.easyevent.easyevent.services.EventService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,7 @@ public class EventController {
     }
 
     private EventService eventService;
+    private EmailService emailService;
 
 
     @GetMapping("/eventos")
@@ -31,8 +35,19 @@ public class EventController {
     }
 
     @PostMapping("/eventos/save")
-    public Evento saveEvento(@RequestBody Evento evento){
-        return eventService.saveEvento(evento);
+    public ResponseEntity<?> crearEvento(@RequestBody Evento evento) {
+        try {
+            ResponseEntity<Evento> eventoGuardado = eventService.saveEvento(evento);
+            Proveedor proveedor = evento.getIdproveedor();
+            if (proveedor != null){
+            emailService.sendEmail(proveedor.getCorreo(),"Guardado exitoso","Hola "+proveedor.getNombreempresa()+" Tu evento" +evento.getNombreEvento()+" ha sido guardado con exito");}
+            else{
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
+            return ResponseEntity.status(HttpStatus.CREATED).body(eventoGuardado);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @DeleteMapping("/eventos/delete")
