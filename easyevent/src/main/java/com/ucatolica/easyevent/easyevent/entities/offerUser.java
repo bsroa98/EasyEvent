@@ -1,4 +1,4 @@
-package com.ucatolica.easyevent.easyevent.offeruser;
+package com.ucatolica.easyevent.easyevent.entities;
 
 import jakarta.persistence.*;
 @Entity
