@@ -1,5 +1,7 @@
-package com.ucatolica.easyevent.easyevent.entities;
+package com.ucatolica.easyevent.easyevent.repositories;
 
+import com.ucatolica.easyevent.easyevent.entities.Proveedor;
+import com.ucatolica.easyevent.easyevent.repositories.ProveedorCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
