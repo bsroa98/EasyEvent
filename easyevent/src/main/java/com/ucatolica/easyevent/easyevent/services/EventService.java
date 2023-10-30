@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.math.BigDecimal.*;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 @Service
 public class EventService {
     private EventoRepository eventoRepository;
@@ -24,15 +25,15 @@ public class EventService {
         return eventoRepository.getEvento(id);
     }
 
-    public Evento saveEvento(Evento evento){
+    public ResponseEntity<Evento> saveEvento(Evento evento) {
         if (evento.getPrecio().compareTo(ZERO)<0){
             evento.setPrecio(ZERO);
         }
         if (evento.getCapacidad()<0){
             evento.setCapacidad(0);
-
         }
-        return eventoRepository.save(evento);
+        Evento savedEvento = eventoRepository.save(evento);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedEvento);
     }
 
     public void deleteEvento(Evento evento){
