@@ -1,9 +1,20 @@
 package com.ucatolica.easyevent.easyevent.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "clientes",
+        uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username"),
+        @UniqueConstraint(columnNames = "correo")
+})
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,9 +24,12 @@ public class Cliente {
     @Column(name = "nombre", length = 100)
     private String nombre;
 
+
+    @NotBlank
     @Column(name = "correo", length = 100)
     private String correo;
 
+    @NotBlank
     @Column(name = "pass", length = 100)
     private String pass;
 
@@ -24,6 +38,18 @@ public class Cliente {
 
     @Column(name = "direccion", length = Integer.MAX_VALUE)
     private String direccion;
+
+    @NotBlank
+    @Size(max = 20)
+    private String username;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "usuario_rol",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id"))
+    private Set<Rol> roles = new HashSet<>();
+
+
 
     public Integer getId() {
         return id;
@@ -61,6 +87,22 @@ public class Cliente {
         return numeroIdentificacion;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Set<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Rol> roles) {
+        this.roles = roles;
+    }
+
     public void setNumeroIdentificacion(String numeroIdentificacion) {
         this.numeroIdentificacion = numeroIdentificacion;
     }
@@ -72,5 +114,20 @@ public class Cliente {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
+
+    public Cliente(Integer id, String nombre, String correo, String pass, String numeroIdentificacion, String direccion, String username) {
+        this.id = id;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.pass = pass;
+        this.numeroIdentificacion = numeroIdentificacion;
+        this.direccion = direccion;
+        this.username = username;
+    }
+
+    public Cliente() {
+    }
+
 
 }

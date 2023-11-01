@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import com.ucatolica.easyevent.easyevent.entities.Erol;
+import com.ucatolica.easyevent.easyevent.entities.Rol;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,7 +40,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public static UserDetailsImpl build(Cliente cliente) {
         List<GrantedAuthority> authorities = cliente.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+                .map(role -> new SimpleGrantedAuthority(Erol.ROLE_USER.toString()))
                 .collect(Collectors.toList());
 
         return new UserDetailsImpl(
