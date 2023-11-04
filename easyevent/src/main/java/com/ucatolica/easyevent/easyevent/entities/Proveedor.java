@@ -15,8 +15,6 @@ public class Proveedor implements Serializable {
     @Column(name = "pass")
     private String pass1;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "idproveedor")
     private Set<Evento> eventos = new LinkedHashSet<>();
 
     public Proveedor() {

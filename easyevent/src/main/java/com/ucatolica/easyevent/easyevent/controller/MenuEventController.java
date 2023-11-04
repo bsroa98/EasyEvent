@@ -23,22 +23,23 @@ public class MenuEventController {
 
     @GetMapping("/{menuEventId}")
     public MenuEvent getMenuEvent(@PathVariable Long menuEventId) {
-        return menuEventRepository.findById(menuEventId)
+        return (MenuEvent) menuEventRepository.findById(menuEventId)
                 .orElseThrow(() -> new IllegalArgumentException("MenuEvent not found"));
     }
 
     @GetMapping
-    public List<MenuEvent> getAllMenuEvents() {
+    public Iterable<MenuEvent> getAllMenuEvents() {
         return menuEventRepository.findAll();
     }
 
+
     @PutMapping("/{menuEventId}")
     public MenuEvent updateMenuEvent(@PathVariable Long menuEventId, @RequestBody MenuEvent updatedMenuEvent) {
-        MenuEvent menuEvent = menuEventRepository.findById(menuEventId)
+        MenuEvent menuEvent = (MenuEvent) menuEventRepository.findById(menuEventId)
                 .orElseThrow(() -> new IllegalArgumentException("MenuEvent not found"));
         menuEvent.setName(updatedMenuEvent.getName());
-        menuEvent.setDescription(updatedMenuEvent.getDescription());
-        menuEvent.setPrice(updatedMenuEvent.getPrice());
+
+        menuEvent.setPrecio(updatedMenuEvent.getPrecio());
         return menuEventRepository.save(menuEvent);
     }
 

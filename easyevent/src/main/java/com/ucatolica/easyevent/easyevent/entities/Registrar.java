@@ -14,8 +14,6 @@ public class Registrar implements Serializable{
     @Column(name = "pass")
     private String pass1;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "idusuario")
     private Set<Evento> eventos = new LinkedHashSet<>();
 
     public Registrar() {

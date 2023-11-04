@@ -26,6 +26,6 @@ public class LogService {
 
         // Guarda el registro en la ubicación deseada, como una base de datos o un archivo de registro
         logRepositoryE.save(logEntryE); // Si usas una base de datos
-        // Otra lógica de almacenamiento si usas archivos de registro
+
     }
 }

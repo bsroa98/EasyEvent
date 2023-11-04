@@ -27,6 +27,9 @@ public class MenuEvent {
         this.precio = precio;
     }
 
+    public MenuEvent() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -82,4 +85,7 @@ public class MenuEvent {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+
+
 }
