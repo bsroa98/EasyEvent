@@ -42,11 +42,6 @@
 			<artifactId>mail-spring-boot-starter</artifactId>
 			<version>1.0.1</version>
 		</dependency>
-		<dependency>
-			<groupId>com.ucatolica.easyevent</groupId>
-			<artifactId>easyevent</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 
 
 	</dependencies>

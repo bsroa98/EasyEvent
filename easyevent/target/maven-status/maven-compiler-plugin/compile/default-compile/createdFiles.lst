@@ -1,0 +1,13 @@
+com\ucatolica\easyevent\easyevent\entities\Cliente.class
+com\ucatolica\easyevent\easyevent\entities\ProveedorRepository.class
+com\ucatolica\easyevent\easyevent\services\EventService.class
+com\ucatolica\easyevent\easyevent\entities\EventoRepository.class
+com\ucatolica\easyevent\easyevent\entities\Proveedor.class
+com\ucatolica\easyevent\easyevent\entities\ProveedorCrudRepository.class
+com\ucatolica\easyevent\easyevent\services\ProveedorService.class
+com\ucatolica\easyevent\easyevent\EasyeventApplication.class
+com\ucatolica\easyevent\easyevent\entities\Menu.class
+com\ucatolica\easyevent\easyevent\entities\EventoCrudRepository.class
+com\ucatolica\easyevent\easyevent\entities\Evento.class
+com\ucatolica\easyevent\easyevent\services\EmailService.class
+com\ucatolica\easyevent\easyevent\controller\EventController.class

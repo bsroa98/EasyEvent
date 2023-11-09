@@ -1,7 +1,7 @@
 package com.ucatolica.easyevent.easyevent.services;
 
-import com.ucatolica.easyevent.easyevent.entities.Proveedor;
-import com.ucatolica.easyevent.easyevent.entities.ProveedorRepository;
+import com.ucatolica.easyevent.easyevent.model.Proveedor;
+import com.ucatolica.easyevent.easyevent.repository.ProveedorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
