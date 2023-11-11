@@ -1,4 +1,7 @@
+C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\repository\UsuarioRepository.java
+C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\services\UsuarioService.java
 C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\controller\EventController.java
+C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\controller\UsuarioController.java
 C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\services\EmailService.java
 C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\model\Menu.java
 C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\repository\EventoRepository.java
@@ -7,7 +10,9 @@ C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\
 C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\model\Proveedor.java
 C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\services\ProveedorService.java
 C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\repository\ProveedorRepository.java
+C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\model\EventoDTO.java
 C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\repository\EventoCrudRepository.java
 C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\EasyeventApplication.java
+C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\model\Usuario.java
 C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\model\Cliente.java
 C:\Users\Valen\OneDrive\Documentos\GitHub\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\repository\ProveedorCrudRepository.java

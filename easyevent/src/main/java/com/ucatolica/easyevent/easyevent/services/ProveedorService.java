@@ -15,5 +15,5 @@ public class ProveedorService {
 
     private ProveedorRepository proveedorRepository;
 
-    public Optional<Proveedor> getProveedorById(int id) {return proveedorRepository.getProveedor(id);}
+    public Optional<Proveedor> getProveedorById(Integer id) {return proveedorRepository.findById(id);}
 }

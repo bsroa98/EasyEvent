@@ -5,9 +5,9 @@ import org.antlr.v4.runtime.misc.NotNull;
 public class EventoDTO {
     @NotNull
     private Evento evento;
-    private int Idproveedor;
+    private Integer Idproveedor;
 
-    public EventoDTO(Evento evento, int idproveedor) {
+    public EventoDTO(Evento evento, Integer idproveedor) {
         this.evento = evento;
         Idproveedor = idproveedor;
     }

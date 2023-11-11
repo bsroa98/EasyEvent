@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.ucatolica.easyevent.easyevent.repository.ProveedorRepository;
+//import jakarta.validation.Valid;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,11 +21,6 @@ import java.util.Optional;
     public class EventController {
 
 
-        public EventController(EventService eventService, EmailService emailService,ProveedorService proveedorService) {
-            this.eventService = eventService;
-            this.emailService = emailService;
-            this.proveedorService = proveedorService;
-        }
 
         private EventService eventService;
         private EmailService emailService;
@@ -45,7 +41,7 @@ import java.util.Optional;
         }
 
         @PostMapping("/eventos/save")
-        public ResponseEntity<?> crearEvento(@RequestBody EventoDTO eventoDTO) {
+        public ResponseEntity<String> crearEvento( @RequestBody EventoDTO eventoDTO) {
             try {
                 Evento evento = eventoDTO.getEvento();
                 ResponseEntity<Evento> eventoGuardado = eventService.saveEvento(evento);
@@ -59,7 +55,7 @@ import java.util.Optional;
                 else{
                     return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
                 }
-                return ResponseEntity.status(HttpStatus.CREATED).body(eventoGuardado);
+                return ResponseEntity.status(HttpStatus.CREATED).body("Evento creado");
             } catch (Exception e) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }

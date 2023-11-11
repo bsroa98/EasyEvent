@@ -9,6 +9,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 @Repository
-public interface ProveedorRepository extends JpaRepository<Proveedor, Long> {
+public interface ProveedorRepository extends JpaRepository<Proveedor,Integer> {
 
 }
