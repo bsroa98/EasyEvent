@@ -29,8 +29,9 @@ public class EventService {
     }
 
     public ResponseEntity<Evento> saveEvento(Evento evento) {
-        if (evento.getPrecio().compareTo(ZERO)<0){
-            evento.setPrecio(ZERO);
+
+        if (evento.getPrecio()<0){
+            evento.setPrecio(0.00);
         }
         if (evento.getCapacidad()<0){
             evento.setCapacidad(0);

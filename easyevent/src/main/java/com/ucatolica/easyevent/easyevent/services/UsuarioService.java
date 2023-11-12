@@ -1,4 +1,6 @@
 package com.ucatolica.easyevent.easyevent.services;
+
+import com.ucatolica.easyevent.easyevent.model.LoginDTO;
 import com.ucatolica.easyevent.easyevent.model.Usuario;
 import com.ucatolica.easyevent.easyevent.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
+
     public Optional<Usuario> updateUsuario(Long id, Usuario usuario) {
         if (usuarioRepository.existsById(id)) {
             usuario.setId(id);
@@ -46,5 +49,37 @@ public class UsuarioService {
             return false;
         }
     }
+
+    public Boolean loggin(LoginDTO credenciales) {
+        String correo = credenciales.getCorreo();
+        String contrasena = credenciales.getContrasena();
+        try {
+            // Buscar el usuario por correo
+            Usuario usuario = usuarioRepository.findByCorreo(correo);
+
+            // Verificar si se encontró un usuario con el correo dado
+            if (usuario != null) {
+                // Comparar contraseñas en texto plano
+                if (usuario.getContrasena().equals(contrasena)) {
+                    // Credenciales válidas
+                    return true;
+                } else {
+                    // Contraseña incorrecta
+                    return false;
+                }
+            } else {
+                // No se encontró un usuario con el correo dado
+                return false;
+            }
+
+
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Error interno en el sistema.");
+        }
+
+
+    }
+
 }
+
 

@@ -1,23 +1,17 @@
 package com.ucatolica.easyevent.easyevent.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "eventos")
 public class Evento {
 
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "evento_id", nullable = false)
     private Integer id;
+
+    @Column(name = "idproveedor", length = Integer.MAX_VALUE)
+    private Integer idproveedor;
 
     @Column(name = "nombre_evento", length = 100)
     private String nombreEvento;
@@ -31,8 +25,8 @@ public class Evento {
     @Column(name = "edad_recomendada")
     private Integer edadRecomendada;
 
-    @Column(name = "precio", precision = 10, scale = 2)
-    private BigDecimal precio;
+    @Column(name = "precio")
+    private Double precio;
 
     @Column(name = "actividades", length = Integer.MAX_VALUE)
     private String actividades;
@@ -55,8 +49,9 @@ public class Evento {
     @Column(name = "estado", length = Integer.MAX_VALUE)
     private String estado;
 
-    public Evento( String nombreEvento, String descripcion, String tipoEvento, Integer edadRecomendada, BigDecimal precio, String actividades, String ubicacion, String georeferencia, String categoria, Integer capacidad, String comida, String estado) {
-
+    public Evento(Integer id, Integer idproveedor, String nombreEvento, String descripcion, String tipoEvento, Integer edadRecomendada, Double precio, String actividades, String ubicacion, String georeferencia, String categoria, Integer capacidad, String comida, String estado) {
+        this.id = id;
+        this.idproveedor = idproveedor;
         this.nombreEvento = nombreEvento;
         this.descripcion = descripcion;
         this.tipoEvento = tipoEvento;
@@ -73,12 +68,21 @@ public class Evento {
 
     public Evento() {
     }
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getIdproveedor() {
+        return idproveedor;
+    }
+
+    public void setIdproveedor(Integer idproveedor) {
+        this.idproveedor = idproveedor;
     }
 
     public String getNombreEvento() {
@@ -113,11 +117,11 @@ public class Evento {
         this.edadRecomendada = edadRecomendada;
     }
 
-    public BigDecimal getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(BigDecimal precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
