@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.ucatolica.easyevent.easyevent.JWT.JwtUtil;
 
 @RestController
 public class OfferController {
@@ -32,8 +33,18 @@ public class OfferController {
     }
 
     @GetMapping("/GETBYNAME/{nombreContacto}")
-    public Optional<offerUser> getOfferUser(@PathVariable String nombreContacto){
-        return offerUserService.getOfferUserByName(nombreContacto);
+    public ResponseEntity<?> getOfferUser(@PathVariable String nombreContacto, @RequestHeader("Authorization") String authorization) {
+        try {
+            Optional<offerUser> ofertaGuardada = offerUserService.getOfferUserByName(nombreContacto);
+
+            if (!JwtUtil.verifyToken(authorization)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+
+            return ResponseEntity.ok().body(ofertaGuardada);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @Autowired
@@ -43,6 +54,8 @@ public class OfferController {
         try {
             offerUser ofertaGuardada = offerUserService.saveOfferUser(offeruser);
 
+            String token = JwtUtil.generateToken(offeruser.getNombreContacto());
+
             if (ofertaGuardada != null && evento != null){
                 emailService.sendEmail(offeruser.getCorreoContacto(),"Guardado exitoso","Hola "+offeruser.getNombreContacto()+"; Tu oferta de empleo para el proveedor " +evento.getNombreEvento()+" ha sido guardado con exito");}
             else{
@@ -51,7 +64,7 @@ public class OfferController {
 
             logService.logActivity("username", "Offer Saved", "No exception", getClientIp(request));
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(ofertaGuardada);
+            return ResponseEntity.ok().body("Oferta creada\nToken: " + token);
         } catch (Exception e) {
             logService.logActivity("username", "Offer Save Failed", e.getMessage(), getClientIp(request));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
