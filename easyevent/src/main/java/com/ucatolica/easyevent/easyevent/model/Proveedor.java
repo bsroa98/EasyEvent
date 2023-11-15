@@ -1,4 +1,4 @@
-package com.ucatolica.easyevent.easyevent.model;
+package com.ucatolica.easyevent.easyevent.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -14,6 +14,22 @@ public class Proveedor implements Serializable {
 
     @Column(name = "pass")
     private String pass1;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "idproveedor")
+    private Set<Evento> eventos = new LinkedHashSet<>();
+
+    public Proveedor() {
+    }
+
+    public Proveedor(Integer id, String nombreempresa, Integer nit, String correo, String pass) {
+        this.id = id;
+        this.nombreempresa = nombreempresa;
+        this.nit = nit;
+        this.correo = correo;
+        this.pass = pass;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "proveedor_id")
@@ -25,16 +41,12 @@ public class Proveedor implements Serializable {
     @Column (name = "contraseña")
     private String pass;
 
-    public Proveedor() {
+    public Set<Evento> getEventos() {
+        return eventos;
     }
 
-    public Proveedor(String pass1, Integer id, String nombreempresa, Integer nit, String correo, String pass) {
-        this.pass1 = pass1;
-        this.id = id;
-        this.nombreempresa = nombreempresa;
-        this.nit = nit;
-        this.correo = correo;
-        this.pass = pass;
+    public void setEventos(Set<Evento> eventos) {
+        this.eventos = eventos;
     }
 
     public String getPass1() {
@@ -44,6 +56,7 @@ public class Proveedor implements Serializable {
     public void setPass1(String pass1) {
         this.pass1 = pass1;
     }
+
 
     public Integer getId() {
         return id;
@@ -84,4 +97,10 @@ public class Proveedor implements Serializable {
     public void setPass(String pass) {
         this.pass = pass;
     }
+/*
+    TODO [JPA Buddy] create field to map the 'rol' column
+     Available actions: Define target Java type | Uncomment as is | Remove column mapping
+    @Column(name = "rol", columnDefinition = "rol_enum(0, 0)")
+    private java.lang.Object rol;
+*/
 }

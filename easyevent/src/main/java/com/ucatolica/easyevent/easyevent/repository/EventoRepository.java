@@ -1,6 +1,12 @@
+<<<<<<<< HEAD:easyevent/src/main/java/com/ucatolica/easyevent/easyevent/repository/EventoRepository.java
 package com.ucatolica.easyevent.easyevent.repository;
 import com.ucatolica.easyevent.easyevent.model.Evento;
 import com.ucatolica.easyevent.easyevent.repository.EventoCrudRepository;
+========
+package com.ucatolica.easyevent.easyevent.repositories;
+import com.ucatolica.easyevent.easyevent.entities.Evento;
+import com.ucatolica.easyevent.easyevent.repositories.EventoCrudRepository;
+>>>>>>>> SecurityJWT:easyevent/src/main/java/com/ucatolica/easyevent/easyevent/repositories/EventoRepository.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
