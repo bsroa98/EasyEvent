@@ -47,7 +47,11 @@ public class EventController {
 
             if (optionalProveedor.isPresent()){
                 Proveedor proveedor = optionalProveedor.get();
-                emailService.sendEmail(proveedor.getCorreo(),"Guardado exitoso","Hola "+proveedor.getNombreempresa()+"; Tu evento " +evento.getNombreEvento()+" ha sido guardado con exito");}
+                emailService.sendEmail(
+                        proveedor.getCorreo(),
+                        "Guardado exitoso",
+                        "Hola "+proveedor.getNombreempresa()+"; Tu evento " +evento.getNombreEvento()+" ha sido guardado con exito",
+                        "C:\\Users\\User\\Desktop\\ProyectoCS\\EasyEvent\\easyevent\\src\\main\\java\\com\\ucatolica\\easyevent\\easyevent\\img\\Success.png");}
             else{
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
