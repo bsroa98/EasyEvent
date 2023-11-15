@@ -2,7 +2,7 @@ package com.ucatolica.easyevent.easyevent.services;
 
 import com.ucatolica.easyevent.easyevent.model.LoginDTO;
 import com.ucatolica.easyevent.easyevent.model.Usuario;
-import com.ucatolica.easyevent.easyevent.repository.UsuarioRepository;
+import com.ucatolica.easyevent.easyevent.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

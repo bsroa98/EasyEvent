@@ -1,4 +1,4 @@
-package com.ucatolica.easyevent.easyevent.entities;
+package com.ucatolica.easyevent.easyevent.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

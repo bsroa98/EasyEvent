@@ -1,16 +1,13 @@
 package com.ucatolica.easyevent.easyevent.services;
 
-import com.ucatolica.easyevent.easyevent.entities.Evento;
-import com.ucatolica.easyevent.easyevent.entities.OfferUserRepository;
-import com.ucatolica.easyevent.easyevent.entities.offerUser;
+import com.ucatolica.easyevent.easyevent.model.Evento;
+import com.ucatolica.easyevent.easyevent.repositories.OfferUserRepository;
+import com.ucatolica.easyevent.easyevent.model.offerUser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import static java.math.BigDecimal.*;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 @Service
 public class OfferUserService {
     private OfferUserRepository offerUserRepository;

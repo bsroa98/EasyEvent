@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ucatolica.easyevent.easyevent.entities.Cliente;
+import com.ucatolica.easyevent.easyevent.model.Cliente;
 import com.ucatolica.easyevent.easyevent.repositories.ClienteRepository;
 
 @Service

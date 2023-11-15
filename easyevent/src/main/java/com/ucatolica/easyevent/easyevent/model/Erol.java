@@ -1,4 +1,4 @@
-package com.ucatolica.easyevent.easyevent.entities;
+package com.ucatolica.easyevent.easyevent.model;
 
 public enum Erol {
     ROLE_USER,

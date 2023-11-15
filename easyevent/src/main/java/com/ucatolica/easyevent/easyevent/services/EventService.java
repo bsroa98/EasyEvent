@@ -1,5 +1,5 @@
 package com.ucatolica.easyevent.easyevent.services;
-import com.ucatolica.easyevent.easyevent.entities.Evento;
+import com.ucatolica.easyevent.easyevent.model.Evento;
 import com.ucatolica.easyevent.easyevent.repositories.EventoRepository;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +26,8 @@ public class EventService {
     }
 
     public ResponseEntity<Evento> saveEvento(Evento evento) {
-        if (evento.getPrecio().compareTo(ZERO)<0){
-            evento.setPrecio(ZERO);
+        if (evento.getPrecio().compareTo(0.1)<0){
+            evento.setPrecio(0.1);
         }
         if (evento.getCapacidad()<0){
             evento.setCapacidad(0);

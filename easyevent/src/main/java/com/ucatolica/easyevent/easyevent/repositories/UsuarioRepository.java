@@ -1,4 +1,4 @@
-package com.ucatolica.easyevent.easyevent.repository;
+package com.ucatolica.easyevent.easyevent.repositories;
 
 import com.ucatolica.easyevent.easyevent.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;

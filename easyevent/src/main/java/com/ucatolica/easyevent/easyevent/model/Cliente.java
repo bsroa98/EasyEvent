@@ -1,8 +1,6 @@
 package com.ucatolica.easyevent.easyevent.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,12 +20,9 @@ public class Cliente {
     @Column(name = "nombre", length = 100)
     private String nombre;
 
-
-    @NotBlank
     @Column(name = "correo", length = 100)
     private String correo;
 
-    @NotBlank
     @Column(name = "pass", length = 100)
     private String pass;
 
@@ -37,8 +32,6 @@ public class Cliente {
     @Column(name = "direccion", length = Integer.MAX_VALUE)
     private String direccion;
 
-    @NotBlank
-    @Size(max = 20)
     private String username;
 
     @ManyToMany(fetch = FetchType.LAZY)

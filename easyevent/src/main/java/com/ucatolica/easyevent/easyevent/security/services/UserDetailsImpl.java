@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import com.ucatolica.easyevent.easyevent.entities.Erol;
-import com.ucatolica.easyevent.easyevent.entities.Rol;
+import com.ucatolica.easyevent.easyevent.model.Erol;
+import com.ucatolica.easyevent.easyevent.model.Rol;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.ucatolica.easyevent.easyevent.entities.Cliente;
+import com.ucatolica.easyevent.easyevent.model.Cliente;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

@@ -1,8 +1,8 @@
 package com.ucatolica.easyevent.easyevent.services;
-import com.ucatolica.easyevent.easyevent.entities.LogEntityRepository;
+import com.ucatolica.easyevent.easyevent.repositories.LogEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ucatolica.easyevent.easyevent.entities.LogEntity;
+import com.ucatolica.easyevent.easyevent.model.LogEntity;
 
 import java.time.LocalDate;
 
