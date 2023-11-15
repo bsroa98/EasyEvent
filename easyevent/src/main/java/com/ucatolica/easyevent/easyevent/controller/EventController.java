@@ -1,32 +1,32 @@
 package com.ucatolica.easyevent.easyevent.controller;
 
-import com.ucatolica.easyevent.easyevent.entities.Evento;
-import com.ucatolica.easyevent.easyevent.entities.Proveedor;
+import com.ucatolica.easyevent.easyevent.model.Evento;
+
+import com.ucatolica.easyevent.easyevent.model.Proveedor;
 import com.ucatolica.easyevent.easyevent.services.EmailService;
 import com.ucatolica.easyevent.easyevent.services.EventService;
 import com.ucatolica.easyevent.easyevent.services.ProveedorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.ucatolica.easyevent.easyevent.repository.ProveedorRepository;
+//import jakarta.validation.Valid;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/evento")
 public class EventController {
-
-
-    public EventController(EventService eventService, EmailService emailService,ProveedorService proveedorService) {
-        this.eventService = eventService;
-        this.emailService = emailService;
-        this.proveedorService = proveedorService;
-    }
-
+    @Autowired
     private EventService eventService;
+    @Autowired
     private EmailService emailService;
-
+    @Autowired
     private ProveedorService proveedorService;
-
+    @Autowired
+    private ProveedorRepository proveedorRepository;
 
     @GetMapping("/eventos")
     public List<Evento> getAll(){
@@ -40,21 +40,20 @@ public class EventController {
     }
 
     @PostMapping("/eventos/save")
-    public ResponseEntity<?> crearEvento(@RequestBody Evento evento) {
+    public ResponseEntity<String> crearEvento( @RequestBody Evento evento) {
         try {
             ResponseEntity<Evento> eventoGuardado = eventService.saveEvento(evento);
-            Proveedor proveedorTemp = evento.getIdproveedor();
-            Optional<Proveedor> optionalProveedor= proveedorService.getProveedorById(proveedorTemp.getId());
+            Optional<Proveedor> optionalProveedor= proveedorService.getProveedorById(evento.getIdproveedor());
 
             if (optionalProveedor.isPresent()){
-            Proveedor proveedor = optionalProveedor.get();
-            emailService.sendEmail(proveedor.getCorreo(),"Guardado exitoso","Hola "+proveedor.getNombreempresa()+"; Tu evento " +evento.getNombreEvento()+" ha sido guardado con exito");}
+                Proveedor proveedor = optionalProveedor.get();
+                emailService.sendEmail(proveedor.getCorreo(),"Guardado exitoso","Hola "+proveedor.getNombreempresa()+"; Tu evento " +evento.getNombreEvento()+" ha sido guardado con exito");}
             else{
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
-            return ResponseEntity.status(HttpStatus.CREATED).body(eventoGuardado);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Evento creado");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
@@ -62,7 +61,4 @@ public class EventController {
     public void deleteEvento(@RequestBody Evento evento){
         eventService.deleteEvento(evento);
     }
-
-
-
 }

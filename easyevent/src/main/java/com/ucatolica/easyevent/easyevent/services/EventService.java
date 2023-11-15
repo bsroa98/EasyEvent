@@ -1,6 +1,7 @@
 package com.ucatolica.easyevent.easyevent.services;
-import com.ucatolica.easyevent.easyevent.entities.Evento;
-import com.ucatolica.easyevent.easyevent.entities.EventoRepository;
+import com.ucatolica.easyevent.easyevent.model.Evento;
+import com.ucatolica.easyevent.easyevent.repository.EventoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +11,9 @@ import static java.math.BigDecimal.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 @Service
+
 public class EventService {
+    @Autowired
     private EventoRepository eventoRepository;
 
     public EventService(EventoRepository eventoRepository) {
@@ -26,8 +29,9 @@ public class EventService {
     }
 
     public ResponseEntity<Evento> saveEvento(Evento evento) {
-        if (evento.getPrecio().compareTo(ZERO)<0){
-            evento.setPrecio(ZERO);
+
+        if (evento.getPrecio()<0){
+            evento.setPrecio(0.00);
         }
         if (evento.getCapacidad()<0){
             evento.setCapacidad(0);

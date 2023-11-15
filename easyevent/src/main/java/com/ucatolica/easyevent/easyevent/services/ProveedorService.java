@@ -1,7 +1,7 @@
 package com.ucatolica.easyevent.easyevent.services;
 
-import com.ucatolica.easyevent.easyevent.entities.Proveedor;
-import com.ucatolica.easyevent.easyevent.entities.ProveedorRepository;
+import com.ucatolica.easyevent.easyevent.model.Proveedor;
+import com.ucatolica.easyevent.easyevent.repository.ProveedorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,5 +15,5 @@ public class ProveedorService {
 
     private ProveedorRepository proveedorRepository;
 
-    public Optional<Proveedor> getProveedorById(int id) {return proveedorRepository.getProveedor(id);}
+    public Optional<Proveedor> getProveedorById(Integer id) {return proveedorRepository.findById(id);}
 }

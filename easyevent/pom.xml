@@ -43,9 +43,9 @@
 			<version>1.0.1</version>
 		</dependency>
 		<dependency>
-			<groupId>com.ucatolica.easyevent</groupId>
-			<artifactId>easyevent</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>2.0.2</version>
 		</dependency>
 
 
