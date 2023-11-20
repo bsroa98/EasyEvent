@@ -28,6 +28,9 @@ public class offerUser {
     @Column(name = "experiencia", length = 500)
     private String experiencia;
 
+    public offerUser(String nombreContacto, String correoContacto) {
+    }
+
 
     public String getNombreContacto() {
         return nombreContacto;

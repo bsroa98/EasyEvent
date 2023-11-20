@@ -69,6 +69,9 @@ public class Evento {
     public Evento() {
     }
 
+    public Evento(String nombreEvento, String descripcionEvento) {
+    }
+
     public Integer getId() {
         return id;
     }
