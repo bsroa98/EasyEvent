@@ -21,7 +21,7 @@ public class EasyeventApplication {
 				.info(new Info()
 						.title("EasyEvent Spring Boot API -------")
 						.version("0.1")
-						.description("Ejemplo Swagger")
+						.description("Ejemplo Swagger API")
 						.termsOfService("http://swagger.io/terms/")
 						.license(new License().name("Apache 2.0").url("http://springdoc.org")));
 
