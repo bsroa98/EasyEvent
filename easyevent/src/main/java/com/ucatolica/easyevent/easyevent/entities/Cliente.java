@@ -38,7 +38,7 @@ public class Cliente {
     private String direccion;
 
     @NotBlank
-    @Size(max = 20)
+    //@Size(max = 20)
     private String username;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -114,8 +114,7 @@ public class Cliente {
     }
 
 
-    public Cliente(Integer id, String nombre, String correo, String pass, String numeroIdentificacion, String direccion, String username) {
-        this.id = id;
+    public Cliente( String nombre, String correo, String pass, String numeroIdentificacion, String direccion, String username) {
         this.nombre = nombre;
         this.correo = correo;
         this.pass = pass;

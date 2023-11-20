@@ -11,5 +11,5 @@ import com.ucatolica.easyevent.easyevent.entities.Erol;
 
 @Repository
 public interface RolRepository extends JpaRepository<Rol, Long> {
-
+    Optional<Rol> findByName(Erol name);
 }

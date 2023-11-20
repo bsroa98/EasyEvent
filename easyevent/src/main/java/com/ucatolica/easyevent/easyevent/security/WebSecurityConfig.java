@@ -23,9 +23,9 @@ import com.ucatolica.easyevent.easyevent.security.services.UserDetailsServiceImp
 
 @Configuration
 @EnableMethodSecurity
-//(securedEnabled = true,
-//jsr250Enabled = true,
-//prePostEnabled = true) // by default
+(securedEnabled = true,
+jsr250Enabled = true,
+prePostEnabled = true) // by default
 public class WebSecurityConfig {
 
     @Value("${spring.h2.console.path}")
@@ -71,6 +71,8 @@ public class WebSecurityConfig {
                         auth.requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/test/**").permitAll()
                                 .anyRequest().authenticated()
+
+
                 );
 
         // fix H2 database console: Refused to display ' in a frame because it set 'X-Frame-Options' to 'deny'
