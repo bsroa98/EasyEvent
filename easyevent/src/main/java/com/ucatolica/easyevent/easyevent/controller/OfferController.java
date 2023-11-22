@@ -10,11 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+import com.ucatolica.easyevent.easyevent.JWT.JwtUtil;
+
 import java.util.List;
 import java.util.Optional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-import com.ucatolica.easyevent.easyevent.JWT.JwtUtil;
 
 @RestController
 public class OfferController {
@@ -47,6 +55,23 @@ public class OfferController {
         }
     }
 
+    @Operation(summary = "Guarda la oferta de empleo",
+            description = "Guarda la oferta de empleo y envía una notificación por correo al cliente",
+            tags = {"offer", "saveOfferUser"})
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Se ha guardado exitosamente la oferta de empleo y se ha enviado una notificación por correo"),
+            @ApiResponse(responseCode = "403", description = "Falló el guardado de la oferta de empleo"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @Parameters({
+            @Parameter(name="nombreContacto", description="Nombre del contacto", example="Juan Pérez"),
+            @Parameter(name="telefonoContacto", description="Teléfono del contacto", example="3214567890"),
+            @Parameter(name="correoContacto", description="Correo electrónico del contacto", example="juan.perez@example.com"),
+            @Parameter(name="cargoOferta", description="Cargo que se ofrece", example="Desarrollador de software"),
+            @Parameter(name="salarioOferta", description="Salario que se ofrece", example="1.000.000 pesos colombianos"),
+            @Parameter(name="horarioOferta", description="Horario de la oferta", example="Lunes a viernes de 8:00 a.m. a 6:00 p.m."),
+            @Parameter(name="lugarOferta", description="Lugar de la oferta", example="Medellín, Colombia")
+    })
     @Autowired
     private LogService logService;
     @PostMapping("/saveOfferUser")
