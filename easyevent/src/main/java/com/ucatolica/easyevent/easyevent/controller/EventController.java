@@ -38,7 +38,6 @@ public class EventController {
 
     @GetMapping("/eventos")
     public List<Evento> getAll(){
-
         return eventService.getAllEvents();
     }
 
@@ -72,7 +71,7 @@ public class EventController {
 
             if (optionalProveedor.isPresent()){
             Proveedor proveedor = optionalProveedor.get();
-            emailService.sendEmail(proveedor.getCorreo(),"Guardado exitoso","Hola "+proveedor.getNombreempresa()+"; Tu evento " +evento.getNombreEvento()+" ha sido guardado con exito");}
+            emailService.sendTextEmail(proveedor.getCorreo(),"Guardado exitoso","Hola "+proveedor.getNombreempresa()+"; Tu evento " +evento.getNombreEvento()+" ha sido guardado con exito");}
             else{
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }

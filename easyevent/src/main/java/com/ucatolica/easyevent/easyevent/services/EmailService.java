@@ -30,4 +30,13 @@ public class EmailService {
 
         javaMailSender.send(message);
     }
+
+    public void sendTextEmail(String to, String subject, String text)throws IOException, MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(text);
+    }
 }
