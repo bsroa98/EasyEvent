@@ -97,4 +97,10 @@ public class Proveedor implements Serializable {
     public void setPass(String pass) {
         this.pass = pass;
     }
+/*
+    TODO [JPA Buddy] create field to map the 'rol' column
+     Available actions: Define target Java type | Uncomment as is | Remove column mapping
+    @Column(name = "rol", columnDefinition = "rol_enum(0, 0)")
+    private java.lang.Object rol;
+*/
 }

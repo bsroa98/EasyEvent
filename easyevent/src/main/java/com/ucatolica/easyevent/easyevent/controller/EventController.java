@@ -8,6 +8,14 @@ import com.ucatolica.easyevent.easyevent.services.ProveedorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +38,6 @@ public class EventController {
 
     @GetMapping("/eventos")
     public List<Evento> getAll(){
-
         return eventService.getAllEvents();
     }
 
@@ -39,6 +46,22 @@ public class EventController {
         return eventService.getEventoById(id);
     }
 
+    @Operation(summary = "Crea un nuevo evento",
+            description = "Crea un nuevo evento y envía un notificación por correo al proveedor asociado con dicho evento",
+            tags = {"event", "crearEvento"})
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Se ha creado el evento y se ha enviado el correo exitosamente"),
+            @ApiResponse(responseCode = "403", description = "Falló la creación del evento"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @Parameters({
+            @Parameter(name="nombreEvento", description="Nombre del evento", example="Evento de lanzamiento de nuevo producto"),
+            @Parameter(name="descripcion", description="Descripción del evento", example="Evento para presentar el lanzamiento de nuestro nuevo producto innovador"),
+            @Parameter(name="fechaEvento", description="Fecha del evento", example="2023-10-12"),
+            @Parameter(name="horaEvento", description="Hora del evento", example="10:00 AM"),
+            @Parameter(name="lugarEvento", description="Lugar del evento", example="Auditorio principal, Universidad EAFIT"),
+            @Parameter(name="idproveedor", description="Identificador del proveedor asociado al evento", example="1")
+    })
     @PostMapping("/eventos/save")
     public ResponseEntity<?> crearEvento(@RequestBody Evento evento) {
         try {
@@ -48,7 +71,7 @@ public class EventController {
 
             if (optionalProveedor.isPresent()){
             Proveedor proveedor = optionalProveedor.get();
-            emailService.sendEmail(proveedor.getCorreo(),"Guardado exitoso","Hola "+proveedor.getNombreempresa()+"; Tu evento " +evento.getNombreEvento()+" ha sido guardado con exito");}
+            emailService.sendTextEmail(proveedor.getCorreo(),"Guardado exitoso","Hola "+proveedor.getNombreempresa()+"; Tu evento " +evento.getNombreEvento()+" ha sido guardado con exito");}
             else{
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }

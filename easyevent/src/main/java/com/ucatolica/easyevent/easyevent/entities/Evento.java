@@ -76,6 +76,9 @@ public class Evento {
     @Column(name = "estado", length = Integer.MAX_VALUE)
     private String estado;
 
+    public Evento(String nombreEvento, String descripcionEvento) {
+    }
+
     public Proveedor getIdproveedor() {
         return idproveedor;
     }
