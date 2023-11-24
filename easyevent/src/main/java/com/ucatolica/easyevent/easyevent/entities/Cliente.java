@@ -41,6 +41,9 @@ public class Cliente {
     //@Size(max = 20)
     private String username;
 
+    @Column(name = "Verificado")
+    private Boolean Verificado = false;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "usuario_rol",
             joinColumns = @JoinColumn(name = "usuario_id"),
@@ -113,8 +116,15 @@ public class Cliente {
         this.direccion = direccion;
     }
 
+    public Boolean isVerificado() {
+        return Verificado;
+    }
 
-    public Cliente( String nombre, String correo, String pass, String numeroIdentificacion, String direccion, String username) {
+    public void setVerificado() {
+        this.Verificado = true;
+    }
+
+    public Cliente(String nombre, String correo, String pass, String numeroIdentificacion, String direccion, String username) {
         this.nombre = nombre;
         this.correo = correo;
         this.pass = pass;
