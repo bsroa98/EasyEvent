@@ -126,8 +126,10 @@ public class AuthController {
         cliente.setRoles(roles);
         clienteRepository.save(cliente);
         if (cliente.getCorreo() != null) {
-            System.out.println("entro");
             emailService.sendTextEmail(cliente.getCorreo(), "Email verificacion", "Su enlace de verificacion es el siguiente: \n\n"+"localhost/api/auth/verify/" + cliente.getId());
+        }
+        else if (cliente.getCorreo()==null){
+            return ResponseEntity.badRequest().body(new MessageResponse("Error email not found"));
         }
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
