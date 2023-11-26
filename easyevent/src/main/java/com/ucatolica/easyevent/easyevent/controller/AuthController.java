@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.ucatolica.easyevent.easyevent.repositories.ClienteRepository;
 import com.ucatolica.easyevent.easyevent.services.EmailService;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
@@ -27,7 +28,6 @@ import com.ucatolica.easyevent.easyevent.security.payload.request.SignupRequest;
 import com.ucatolica.easyevent.easyevent.security.payload.response.UserInfoResponse;
 import com.ucatolica.easyevent.easyevent.security.payload.response.MessageResponse;
 import com.ucatolica.easyevent.easyevent.repositories.RolRepository;
-import com.ucatolica.easyevent.easyevent.repositories.ClienteRepository;
 import com.ucatolica.easyevent.easyevent.security.jwt.JwtUtils;
 import com.ucatolica.easyevent.easyevent.security.services.UserDetailsImpl;
 
@@ -126,7 +126,6 @@ public class AuthController {
         cliente.setRoles(roles);
         clienteRepository.save(cliente);
         if (cliente.getCorreo() != null) {
-            System.out.println("entro");
             emailService.sendTextEmail(cliente.getCorreo(), "Email verificacion", "Su enlace de verificacion es el siguiente: \n\n"+"localhost/api/auth/verify/" + cliente.getId());
         }
 

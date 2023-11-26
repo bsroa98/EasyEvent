@@ -39,4 +39,15 @@ public class EventService {
     public void deleteEvento(Evento evento){
         eventoRepository.delete(evento);
     }
+
+    public boolean deleteEventoById(Integer id) {
+        Optional<Evento> optionalEvento = eventoRepository.getEvento(id);
+
+        if (optionalEvento.isPresent()) {
+            eventoRepository.delete(optionalEvento.get());
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

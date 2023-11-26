@@ -13,4 +13,3 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     Boolean existsByCorreo(String correo);
 }
-

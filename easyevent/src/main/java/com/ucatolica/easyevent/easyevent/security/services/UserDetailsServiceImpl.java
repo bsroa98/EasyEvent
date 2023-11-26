@@ -1,5 +1,6 @@
 package com.ucatolica.easyevent.easyevent.security.services;
 
+import com.ucatolica.easyevent.easyevent.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ucatolica.easyevent.easyevent.entities.Cliente;
-import com.ucatolica.easyevent.easyevent.repositories.ClienteRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

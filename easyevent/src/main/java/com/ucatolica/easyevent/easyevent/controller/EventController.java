@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -81,9 +79,15 @@ public class EventController {
         }
     }
 
-    @DeleteMapping("/eventos/delete")
-    public void deleteEvento(@RequestBody Evento evento){
-        eventService.deleteEvento(evento);
+    @DeleteMapping("/eventos/del/{id}")
+    public ResponseEntity<String> deleteEvento(@PathVariable Integer id) {
+        boolean eliminado = eventService.deleteEventoById(id);
+
+        if (eliminado) {
+            return ResponseEntity.ok("Evento eliminado correctamente");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el evento con el ID proporcionado");
+        }
     }
 
 
