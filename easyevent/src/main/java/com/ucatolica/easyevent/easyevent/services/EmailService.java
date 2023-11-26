@@ -38,5 +38,8 @@ public class EmailService {
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(text);
+
+
+        javaMailSender.send(message);
     }
 }
