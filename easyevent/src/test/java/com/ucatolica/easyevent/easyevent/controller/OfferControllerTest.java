@@ -3,6 +3,7 @@ package com.ucatolica.easyevent.easyevent.controller;
 import com.ucatolica.easyevent.easyevent.entities.Evento;
 import com.ucatolica.easyevent.easyevent.entities.offerUser;
 import com.ucatolica.easyevent.easyevent.services.EmailService;
+import com.ucatolica.easyevent.easyevent.services.LogService;
 import com.ucatolica.easyevent.easyevent.services.OfferUserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
