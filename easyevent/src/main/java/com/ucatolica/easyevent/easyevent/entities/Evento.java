@@ -1,11 +1,14 @@
 package com.ucatolica.easyevent.easyevent.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "eventos")
@@ -15,6 +18,10 @@ public class Evento {
     @JoinColumn(name = "idproveedor", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Proveedor idproveedor;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "eventoid")
+    private Set<Reserva> reservas = new LinkedHashSet<>();
 
     public Evento(Integer id, String nombreEvento, String descripcion, String tipoEvento, Integer edadRecomendada, BigDecimal precio, String actividades, String ubicacion, String georeferencia, String categoria, Integer capacidad, String comida, String estado) {
         this.id = id;

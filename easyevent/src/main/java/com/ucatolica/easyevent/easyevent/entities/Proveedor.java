@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Table(name = "proveedores")
 
-public class Proveedor implements Serializable {
+public class Proveedor{
 
     @Column(name = "pass")
     private String pass1;

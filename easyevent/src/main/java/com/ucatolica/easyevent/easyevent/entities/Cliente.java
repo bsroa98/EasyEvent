@@ -1,10 +1,12 @@
 package com.ucatolica.easyevent.easyevent.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -18,6 +20,10 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuario_id", nullable = false)
     private Integer id;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "clienteid")
+    private Set<Reserva> reservas = new LinkedHashSet<>();
 
     @Column(name = "nombre", length = 100)
     private String nombre;
