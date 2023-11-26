@@ -24,6 +24,7 @@ import com.ucatolica.easyevent.easyevent.JWT.JwtUtil;
 import java.util.List;
 import java.util.Optional;
 
+@Tag(name="offer", description = "Esta API gestionalas operaciones sobre la entidad OfferUser")
 @RestController
 public class OfferController {
 
@@ -34,6 +35,24 @@ public class OfferController {
 
     private OfferUserService offerUserService;
     private EmailService emailService;
+
+    @Operation(summary = "Guarda la oferta de empleo",
+            description = "Guarda la oferta de empleo y envía una notificación por correo al cliente",
+            tags = {"offer", "saveOfferUser"})
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Se ha guardado exitosamente la oferta de empleo y se ha enviado una notificación por correo"),
+            @ApiResponse(responseCode = "403", description = "Falló el guardado de la oferta de empleo"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @Parameters({
+            @Parameter(name="nombreContacto", description="Nombre del contacto", example="Juan Pérez"),
+            @Parameter(name="telefonoContacto", description="Teléfono del contacto", example="3214567890"),
+            @Parameter(name="correoContacto", description="Correo electrónico del contacto", example="juan.perez@example.com"),
+            @Parameter(name="cargoOferta", description="Cargo que se ofrece", example="Desarrollador de software"),
+            @Parameter(name="salarioOferta", description="Salario que se ofrece", example="1.000.000 pesos colombianos"),
+            @Parameter(name="horarioOferta", description="Horario de la oferta", example="Lunes a viernes de 8:00 a.m. a 6:00 p.m."),
+            @Parameter(name="lugarOferta", description="Lugar de la oferta", example="Medellín, Colombia")
+    })
 
     @GetMapping("/getOffers")
     public List<offerUser> getAll(){
@@ -55,23 +74,6 @@ public class OfferController {
         }
     }
 
-    @Operation(summary = "Guarda la oferta de empleo",
-            description = "Guarda la oferta de empleo y envía una notificación por correo al cliente",
-            tags = {"offer", "saveOfferUser"})
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Se ha guardado exitosamente la oferta de empleo y se ha enviado una notificación por correo"),
-            @ApiResponse(responseCode = "403", description = "Falló el guardado de la oferta de empleo"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
-    })
-    @Parameters({
-            @Parameter(name="nombreContacto", description="Nombre del contacto", example="Juan Pérez"),
-            @Parameter(name="telefonoContacto", description="Teléfono del contacto", example="3214567890"),
-            @Parameter(name="correoContacto", description="Correo electrónico del contacto", example="juan.perez@example.com"),
-            @Parameter(name="cargoOferta", description="Cargo que se ofrece", example="Desarrollador de software"),
-            @Parameter(name="salarioOferta", description="Salario que se ofrece", example="1.000.000 pesos colombianos"),
-            @Parameter(name="horarioOferta", description="Horario de la oferta", example="Lunes a viernes de 8:00 a.m. a 6:00 p.m."),
-            @Parameter(name="lugarOferta", description="Lugar de la oferta", example="Medellín, Colombia")
-    })
     @Autowired
     private LogService logService;
     @PostMapping("/saveOfferUser")

@@ -5,21 +5,20 @@ import com.ucatolica.easyevent.easyevent.entities.Proveedor;
 import com.ucatolica.easyevent.easyevent.services.EmailService;
 import com.ucatolica.easyevent.easyevent.services.EventService;
 import com.ucatolica.easyevent.easyevent.services.ProveedorService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 import java.util.Optional;
 
+@Tag(name="event", description = "Esta API gestiona las operaciones sobre la entidad Evento")
 @RestController
 public class EventController {
 
