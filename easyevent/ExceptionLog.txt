@@ -1,0 +1,4 @@
+8.
++[2023-11-14 12:57:14] Object Name: Sin Stack Trace, Exception Message: Id erroneo, IP Address: 10.158.215.143
+[2023-11-14 13:00:01] Object Name: Sin Stack Trace, Exception Message: Id erroneo, IP Address: 10.158.215.143
+[2023-11-14 13:02:08] Object Name: [Ljava.lang.StackTraceElement;@d35b20d, Exception Message: Id erroneo, IP Address: 10.158.215.143
