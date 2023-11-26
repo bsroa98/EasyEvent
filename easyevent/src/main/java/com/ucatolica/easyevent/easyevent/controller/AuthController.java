@@ -2,25 +2,22 @@ package com.ucatolica.easyevent.easyevent.controller;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.ucatolica.easyevent.easyevent.services.EmailService;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ucatolica.easyevent.easyevent.entities.Cliente;
 import com.ucatolica.easyevent.easyevent.entities.Rol;
@@ -53,6 +50,9 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+    @Autowired
+    EmailService emailService;
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -78,7 +78,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) throws MessagingException {
         if (clienteRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
@@ -125,8 +125,15 @@ public class AuthController {
 
         cliente.setRoles(roles);
         clienteRepository.save(cliente);
+        if (cliente.getCorreo() != null) {
+            emailService.sendTextEmail(cliente.getCorreo(), "Email verificacion", "Su enlace de verificacion es el siguiente: \n\n"+"localhost/api/auth/verify/" + cliente.getId());
+        }
+        else if (cliente.getCorreo()==null){
+            return ResponseEntity.badRequest().body(new MessageResponse("Error email not found"));
+        }
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+
     }
 
     @PostMapping("/signout")
@@ -134,5 +141,24 @@ public class AuthController {
         ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .body(new MessageResponse("You've been signed out!"));
+    }
+
+    @PostMapping("/verify/{id}")
+    public ResponseEntity<?> verifyUser(@PathVariable long id) {
+        Optional<Cliente> clienteTemp = clienteRepository.findById(id);
+        if (clienteTemp.isPresent()) {
+            Cliente cliente = clienteTemp.get();
+            if(!cliente.isVerificado()){
+                cliente.setVerificado();
+                clienteRepository.save(cliente);
+                return ResponseEntity.status(HttpStatus.CREATED).body("User verify");
+            }
+            else{
+                return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body("User already verify");
+            }
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not found");
+        }
     }
 }
