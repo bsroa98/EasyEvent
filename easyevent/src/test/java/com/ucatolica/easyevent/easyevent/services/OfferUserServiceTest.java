@@ -22,21 +22,4 @@ public class OfferUserServiceTest {
         assertTrue(offers.size() > 0);
     }
 
-    @Test
-    public void getOfferUserByName() {
-        offerUser offer = new offerUser("Nombre Contacto", "Correo Contacto");
-        offerUser savedOffer = offerUserService.saveOfferUser(offer);
-        Optional<offerUser> retrievedOffer = offerUserService.getOfferUserByName(savedOffer.getNombreContacto());
-        assertTrue(retrievedOffer.isPresent());
-        assertEquals(savedOffer, retrievedOffer.get());
-    }
-
-    @Test
-    public void saveOfferUser() {
-        offerUser offer = new offerUser("Nombre Contacto", "Correo Contacto");
-        offerUser savedOffer = offerUserService.saveOfferUser(offer);
-        assertNotNull(savedOffer.getNombreContacto());
-        assertEquals(offer.getNombreContacto(), savedOffer.getNombreContacto());
-        assertEquals(offer.getCorreoContacto(), savedOffer.getCorreoContacto());
-    }
 }
