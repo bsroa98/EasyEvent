@@ -66,12 +66,23 @@ public class ReservaController {
     @PostMapping("/reservas/save")
     public ResponseEntity<?> crearReserva(@RequestBody Reserva reserva){
         try{
-            ResponseEntity<Reserva> reservaGuardada = reservaService.saveReserva(reserva);
+            ResponseEntity<?> reservaGuardada = reservaService.saveReserva(reserva);
+            if (reservaGuardada.getBody()=="errorFecha"){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Fecha inexistente");
+            }
+            if (reservaGuardada.getBody()=="errorVerificacion"){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Usuario no verificado");
+            }
+            if (reservaGuardada.getBody()=="errorDisp"){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Fecha ocupada");
+            }
+            if (reservaGuardada.getBody()=="errorAbono"){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Abono insuficiente");
+            }
             Evento eventoid = reserva.getEventoid();
             Optional<Evento> optionalEvento=eventService.getEventoById(eventoid.getId());
             Cliente clienteid = reserva.getClienteid();
             Optional<Cliente> optionalCliente=clientService.getClienteById(clienteid.getId());
-
             if (optionalEvento.isPresent() && optionalCliente.isPresent()){
                 Cliente cliente = optionalCliente.get();
                 Evento evento = optionalEvento.get();

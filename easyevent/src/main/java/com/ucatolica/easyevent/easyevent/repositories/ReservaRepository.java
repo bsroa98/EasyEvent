@@ -4,6 +4,8 @@ import com.ucatolica.easyevent.easyevent.entities.Reserva;
 import com.ucatolica.easyevent.easyevent.entities.Reserva;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
@@ -21,4 +23,6 @@ public class ReservaRepository implements Serializable {
     public Reserva save(Reserva reserva){return reservaCrudRepository.save(reserva);}
 
     public void delete(Reserva reserva){reservaCrudRepository.delete(reserva);}
+
+
 }
