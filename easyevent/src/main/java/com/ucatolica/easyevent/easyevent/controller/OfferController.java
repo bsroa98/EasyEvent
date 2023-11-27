@@ -74,30 +74,24 @@ public class OfferController {
         }
     }
 
-    @Autowired
-    private LogService logService;
     @PostMapping("/saveOfferUser")
-    public ResponseEntity<?> saveOfferUser(@RequestBody offerUser offeruser, @RequestBody Evento evento, @RequestBody HttpServletRequest request) {
+    public ResponseEntity<?> saveOfferUser(@RequestBody offerUser offeruser) {
         try {
             offerUser ofertaGuardada = offerUserService.saveOfferUser(offeruser);
 
-            String token = JwtUtil.generateToken(offeruser.getNombreContacto());
 
-            if (ofertaGuardada != null && evento != null){
+            if (ofertaGuardada != null){
                 emailService.sendEmail(
                         offeruser.getCorreoContacto(),
                         "Guardado exitoso",
-                        "Hola "+offeruser.getNombreContacto()+"; Tu oferta de empleo para el proveedor " +evento.getNombreEvento()+" ha sido guardado con exito",
-                        "C:\\Users\\User\\Desktop\\ProyectoCS\\EasyEvent\\easyevent\\src\\main\\java\\com\\ucatolica\\easyevent\\easyevent\\img\\Success.png");}
+                        "Hola "+offeruser.getNombreContacto()+"; Tu oferta de empleo ha sido guardado con exito",
+                        "D:\\SEPTIMO SEMESTRE\\Corte 1\\Easy Event\\EasyEvent\\easyevent\\src\\main\\java\\com\\ucatolica\\easyevent\\easyevent\\img\\Success.png");}
             else{
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
 
-            logService.logActivity("username", "Offer Saved", "No exception", getClientIp(request));
-
-            return ResponseEntity.ok().body("Oferta creada\nToken: " + token);
+            return ResponseEntity.ok().body("Oferta creada");
         } catch (Exception e) {
-            logService.logActivity("username", "Offer Save Failed", e.getMessage(), getClientIp(request));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }

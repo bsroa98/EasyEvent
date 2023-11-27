@@ -46,9 +46,9 @@ class OfferControllerTest {
     @Test
     public void saveOfferUser() {
         offerUser offer = new offerUser("Nombre Contacto", "Correo Contacto");
-        Evento evento = new Evento("Nombre Evento", "Descripcion Evento");
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        ResponseEntity<?> response = offerController.saveOfferUser(offer, evento, request);
+        //Evento evento = new Evento("Nombre Evento", "Descripcion Evento");
+        //HttpServletRequest request = mock(HttpServletRequest.class);
+        ResponseEntity<?> response = offerController.saveOfferUser(offer);
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 

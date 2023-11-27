@@ -13,6 +13,6 @@ class EventServiceTest {
 
     @Test
     void saveEvento() {
-        Evento e1 = new Evento(12,"fiestacanina","test","test",23,12000000,"test","test","")
+        //Evento e1 = new Evento(12,"fiestacanina","test","test",23,12000000,"test","test","");
     }
 }

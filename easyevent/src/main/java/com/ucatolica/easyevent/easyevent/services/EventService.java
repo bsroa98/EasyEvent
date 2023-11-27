@@ -1,6 +1,7 @@
 package com.ucatolica.easyevent.easyevent.services;
 import com.ucatolica.easyevent.easyevent.entities.Evento;
 import com.ucatolica.easyevent.easyevent.repositories.EventoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 @Service
 public class EventService {
+    @Autowired
     private EventoRepository eventoRepository;
 
     public EventService(EventoRepository eventoRepository) {

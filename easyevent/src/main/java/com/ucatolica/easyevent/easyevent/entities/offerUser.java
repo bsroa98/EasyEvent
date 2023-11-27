@@ -2,7 +2,7 @@ package com.ucatolica.easyevent.easyevent.entities;
 
 import jakarta.persistence.*;
 @Entity
-@Table(name = "ofertaUsuario")
+@Table(name = "oferta_usuario")
 public class offerUser {
 
     public offerUser() {
@@ -16,13 +16,13 @@ public class offerUser {
     }
 
     @Id
-    @Column(name = "nombreContacto", length = 50)
+    @Column(name = "nombre_contacto", length = 50)
     private String nombreContacto;
 
-    @Column(name = "correoContacto", length = 50)
+    @Column(name = "correo_contacto", length = 50)
     private String correoContacto;
 
-    @Column(name = "telefonoContacto", length = 15)
+    @Column(name = "telefono_Contacto", length = 15)
     private int telefonoContacto;
 
     @Column(name = "experiencia", length = 500)
