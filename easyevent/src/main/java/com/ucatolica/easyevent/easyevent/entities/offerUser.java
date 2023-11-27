@@ -1,6 +1,8 @@
 package com.ucatolica.easyevent.easyevent.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
+
 @Entity
 @Table(name = "oferta_usuario")
 public class offerUser {
@@ -19,6 +21,7 @@ public class offerUser {
     @Column(name = "nombre_contacto", length = 50)
     private String nombreContacto;
 
+    @Pattern(regexp = "^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
     @Column(name = "correo_contacto", length = 50)
     private String correoContacto;
 

@@ -1,6 +1,7 @@
 package com.ucatolica.easyevent.easyevent.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 
 import java.time.LocalDate;
 @Entity
@@ -12,6 +13,7 @@ public class LogEntity {
     @Column(name = "date")
     private LocalDate date;
 
+    @Pattern(regexp = "^[a-zA-Z0-9_.-]*$")
     @Column(name = "username")
     private String username;
 

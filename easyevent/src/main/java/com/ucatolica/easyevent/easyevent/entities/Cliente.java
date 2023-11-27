@@ -3,6 +3,7 @@ package com.ucatolica.easyevent.easyevent.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.util.HashSet;
@@ -44,7 +45,7 @@ public class Cliente {
     private String direccion;
 
     @NotBlank
-    //@Size(max = 20)
+    @Pattern(regexp = "^[a-zA-Z0-9_.-]*$")
     private String username;
 
     @Column(name = "Verificado")
