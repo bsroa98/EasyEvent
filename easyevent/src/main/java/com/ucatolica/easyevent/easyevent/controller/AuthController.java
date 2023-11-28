@@ -161,4 +161,11 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not found");
         }
     }
+
+    @GetMapping("/getrol/{id}")
+    public Set<?> getRol(@PathVariable long id){
+        Optional<Cliente> clienteOptional = clienteRepository.findById(id);
+        Cliente cliente = clienteOptional.get();
+        return cliente.getRoles();
+    }
 }

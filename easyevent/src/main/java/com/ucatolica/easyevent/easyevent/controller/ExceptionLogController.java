@@ -6,8 +6,10 @@ import com.ucatolica.easyevent.easyevent.services.ExceptionLogService;
 import com.ucatolica.easyevent.easyevent.services.FileWriterService;
 import com.ucatolica.easyevent.easyevent.services.IpAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -15,7 +17,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/log")
 public class ExceptionLogController {
+
     @Autowired
     private ExceptionLogService exceptionLogService;
 
@@ -31,6 +35,7 @@ public class ExceptionLogController {
     }
 
     @GetMapping("/eventoslog/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public Optional<Evento> getEvento(@PathVariable int id){
         try {
            {

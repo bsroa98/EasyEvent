@@ -38,6 +38,9 @@ public class ReservaService {
 
     public ResponseEntity<?> saveReserva(Reserva reserva) {
         Evento eventoid = reserva.getEventoid();
+        if (eventoid==null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id Nulo");
+        }
         Optional<Evento> optionalEvento=eventService.getEventoById(eventoid.getId());
         Cliente clienteid = reserva.getClienteid();
         Optional<Cliente> optionalCliente=clientService.getClienteById(clienteid.getId());

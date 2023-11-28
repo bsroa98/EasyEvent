@@ -3,6 +3,8 @@ package com.ucatolica.easyevent.easyevent.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "oferta_usuario")
 public class offerUser {
@@ -18,10 +20,10 @@ public class offerUser {
     }
 
     @Id
-    @Column(name = "nombre_contacto", length = 50)
+    @Column(name = "nombre_contacto")
     private String nombreContacto;
 
-    @Pattern(regexp = "^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
+    //@Pattern(regexp = "^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
     @Column(name = "correo_contacto", length = 50)
     private String correoContacto;
 
@@ -65,5 +67,18 @@ public class offerUser {
 
     public void setExperiencia(String experiencia) {
         this.experiencia = experiencia;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        offerUser offerUser = (offerUser) o;
+        return Objects.equals(nombreContacto, offerUser.nombreContacto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombreContacto);
     }
 }

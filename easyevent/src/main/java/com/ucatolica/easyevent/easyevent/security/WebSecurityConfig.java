@@ -1,6 +1,7 @@
 package com.ucatolica.easyevent.easyevent.security;
 
 
+import com.ucatolica.easyevent.easyevent.entities.Erol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -72,7 +73,9 @@ public class WebSecurityConfig {
                                 .requestMatchers("/api/test/**").permitAll()
                                 .requestMatchers("/v3/**").permitAll()
                                 .requestMatchers("/swagger-ui/**").permitAll()
+                                .requestMatchers("/log/eventoslog/{id}").hasRole("ADMIN")
                                 .anyRequest().authenticated()
+
 
 
                 );

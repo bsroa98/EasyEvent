@@ -40,7 +40,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public static UserDetailsImpl build(Cliente cliente) {
         List<GrantedAuthority> authorities = cliente.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(Erol.ROLE_USER.toString()))
+                .map(role -> new SimpleGrantedAuthority(role.getName().toString()))
                 .collect(Collectors.toList());
 
         return new UserDetailsImpl(
@@ -93,6 +93,7 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 
     @Override
     public boolean equals(Object o) {

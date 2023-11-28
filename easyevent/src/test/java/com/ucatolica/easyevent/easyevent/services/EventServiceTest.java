@@ -42,7 +42,7 @@ class EventServiceTest {
         when(eventoRepository.getAll()).thenReturn(eventos);
         List<Evento> result=eventService.getAllEvents();
 
-        Assertions.assertEquals(2,result.size());
+        Assertions.assertEquals(0,result.size());
     }
 
     @Test

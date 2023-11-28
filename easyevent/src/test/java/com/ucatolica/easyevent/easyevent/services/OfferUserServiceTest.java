@@ -21,5 +21,22 @@ public class OfferUserServiceTest {
         List<offerUser> offers = offerUserService.getAllOffers();
         assertTrue(offers.size() > 0);
     }
+    @Test
+    public void getOfferUserByName() {
+        offerUser offer = new offerUser("Nombre Contacto", "Correo Contacto",321,"mesero");
+        offerUser savedOffer = offerUserService.saveOfferUser(offer);
+        offerUser offer2 = new offerUser("Nombre Contacto2", "Correo Contacto",321,"mesero");
+        //Optional<offerUser> retrievedOffer = offerUserService.getOfferUserByName(savedOffer.getNombreContacto());
+        //assertTrue(retrievedOffer.isPresent());
+        assertEquals(offer2, savedOffer);
+    }
+
+    @Test
+    public void saveOfferUser() {
+        offerUser offer = new offerUser("Nombre Contacto", "Correo Contacto",321,"mesero");
+        offerUser savedOffer = offerUserService.saveOfferUser(offer);
+        assertNotNull(savedOffer.getNombreContacto());
+        assertEquals(offer, savedOffer);
+    }
 
 }

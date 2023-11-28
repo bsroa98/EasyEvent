@@ -2,7 +2,6 @@ package com.ucatolica.easyevent.easyevent.controller;
 
 import com.ucatolica.easyevent.easyevent.entities.Cliente;
 import com.ucatolica.easyevent.easyevent.entities.Evento;
-import com.ucatolica.easyevent.easyevent.entities.Proveedor;
 import com.ucatolica.easyevent.easyevent.entities.Reserva;
 import com.ucatolica.easyevent.easyevent.services.*;
 import io.swagger.v3.oas.annotations.Operation;
@@ -58,7 +57,6 @@ public class ReservaController {
     })
     @Parameters({
             @Parameter(name="precioTotal", description="Precio Total de la Reserva", example="500000"),
-            @Parameter(name="fechareserva", description="Fecha de la Reserva", example="2023-11-25"),
             @Parameter(name="fechaevento", description="Fecha del Evento", example="2023-12-07"),
             @Parameter(name="abono", description="Cotizacion del Evento", example="250000")
     })
@@ -79,6 +77,12 @@ public class ReservaController {
             if (reservaGuardada.getBody()=="errorAbono"){
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Abono insuficiente");
             }
+            if (reservaGuardada.getBody()=="Id Nulo"){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Id no puede ser nulo");
+            }
+            if (reservaGuardada.getBody()=="Id Erroneo"){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Id Erroneo");
+            }
             Evento eventoid = reserva.getEventoid();
             Optional<Evento> optionalEvento=eventService.getEventoById(eventoid.getId());
             Cliente clienteid = reserva.getClienteid();
@@ -96,7 +100,6 @@ public class ReservaController {
         }
         catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-
         }
 
     }

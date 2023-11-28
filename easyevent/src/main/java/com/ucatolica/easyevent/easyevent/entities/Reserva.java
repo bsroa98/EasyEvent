@@ -39,7 +39,7 @@ public class Reserva {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reservaid", nullable = false)
+    @Column(name = "reservaid", nullable = false,length = Integer.MAX_VALUE)
     private Integer id;
 
 
