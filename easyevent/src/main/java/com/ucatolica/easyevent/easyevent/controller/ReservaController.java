@@ -1,5 +1,6 @@
 package com.ucatolica.easyevent.easyevent.controller;
 
+import com.ucatolica.easyevent.easyevent.ExceptionHandler.*;
 import com.ucatolica.easyevent.easyevent.entities.Cliente;
 import com.ucatolica.easyevent.easyevent.entities.Evento;
 import com.ucatolica.easyevent.easyevent.entities.Reserva;
@@ -37,14 +38,27 @@ public class ReservaController {
     @Autowired
     private ClientService clientService;
     @Autowired
-    private ProveedorService proveedorService;
+    private GlobalExceptionHandler globalExceptionHandler;
 
     @GetMapping("/reservas")
     public List<Reserva> getALl(){return reservaService.getAllReserva();}
 
     @GetMapping("/reservas/{id}")
-    public Optional<Reserva> getReserva(@PathVariable int id){
-        return reservaService.getReservaById(id);
+    public ResponseEntity<?> getReserva(@PathVariable int id){
+        try {
+            Optional<Reserva> reservaOptional= reservaService.getReservaById(id);
+            if (reservaOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.CREATED).body(reservaOptional.get());
+            }
+            else {
+                throw new ResourceNotFoundException("Reserva no encontrada");
+            }
+        }
+        catch (ResourceNotFoundException ex){
+            ResponseEntity<ErrorResponse> errorResponse = globalExceptionHandler.handleResourceNotFoundException(ex);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+
+        }
     }
 
     @Operation(summary = "Guarda la reserva",
@@ -66,22 +80,22 @@ public class ReservaController {
         try{
             ResponseEntity<?> reservaGuardada = reservaService.saveReserva(reserva);
             if (reservaGuardada.getBody()=="errorFecha"){
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Fecha inexistente");
+                throw new ForbiddenException("Fecha inexistente");
             }
             if (reservaGuardada.getBody()=="errorVerificacion"){
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Usuario no verificado");
+                throw new ForbiddenException("Usuario no verificado");
             }
             if (reservaGuardada.getBody()=="errorDisp"){
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Fecha ocupada");
+                throw new ForbiddenException("Fecha ocupada");
             }
             if (reservaGuardada.getBody()=="errorAbono"){
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Abono insuficiente");
+                throw new ForbiddenException("Abono insuficiente");
             }
             if (reservaGuardada.getBody()=="Id Nulo"){
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Id no puede ser nulo");
+                throw new BadRequestException("id no puede ser nulo");
             }
             if (reservaGuardada.getBody()=="Id Erroneo"){
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("IdErroneo");
+                throw new BadRequestException("IdErroneo");
             }
             Evento eventoid = reserva.getEventoid();
             Optional<Evento> optionalEvento=eventService.getEventoById(eventoid.getId());
@@ -94,12 +108,21 @@ public class ReservaController {
                         +"\n Fecha: "+reserva.getFechaEvento()
                         +"\n Lugar: "+evento.getUbicacion());}
             else{
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+                throw new ForbiddenException("Correo no enviado");
             }
             return  ResponseEntity.status(HttpStatus.CREATED).body(reservaGuardada);
         }
-        catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        catch (ForbiddenException ex) {
+            ResponseEntity<ErrorResponse> errorResponse = globalExceptionHandler.handleForbiddenException(ex);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
+        }
+        catch(BadRequestException ex){
+            ResponseEntity<ErrorResponse> errorResponse = globalExceptionHandler.handleBadRequestException(ex);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+        }
+        catch (Exception ex){
+            ResponseEntity<ErrorResponse> errorResponse = globalExceptionHandler.handleGenericException(ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
 
     }

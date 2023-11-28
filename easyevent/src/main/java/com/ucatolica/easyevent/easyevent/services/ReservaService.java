@@ -1,5 +1,6 @@
 package com.ucatolica.easyevent.easyevent.services;
 
+import com.ucatolica.easyevent.easyevent.ExceptionHandler.BadRequestException;
 import com.ucatolica.easyevent.easyevent.entities.Cliente;
 import com.ucatolica.easyevent.easyevent.entities.Evento;
 import com.ucatolica.easyevent.easyevent.entities.Reserva;
@@ -33,7 +34,8 @@ public class ReservaService {
     public List<Reserva> getAllReserva(){return reservaRepository.getAll();}
 
     public Optional<Reserva> getReservaById(int id) {
-        return reservaRepository.getReserva(id);
+             return reservaRepository.getReserva(id);
+
     }
 
     public ResponseEntity<?> saveReserva(Reserva reserva) {
