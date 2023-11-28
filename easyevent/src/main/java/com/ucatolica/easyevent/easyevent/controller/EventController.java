@@ -2,6 +2,7 @@ package com.ucatolica.easyevent.easyevent.controller;
 
 import com.ucatolica.easyevent.easyevent.entities.Evento;
 import com.ucatolica.easyevent.easyevent.entities.Proveedor;
+import com.ucatolica.easyevent.easyevent.services.ContadorService;
 import com.ucatolica.easyevent.easyevent.services.EmailService;
 import com.ucatolica.easyevent.easyevent.services.EventService;
 import com.ucatolica.easyevent.easyevent.services.ProveedorService;
@@ -24,25 +25,23 @@ import java.util.Optional;
 public class EventController {
 
 
-    public EventController(EventService eventService, EmailService emailService,ProveedorService proveedorService) {
+    public EventController(EventService eventService, EmailService emailService,ProveedorService proveedorService, ContadorService contadorService) {
         this.eventService = eventService;
         this.emailService = emailService;
         this.proveedorService = proveedorService;
+        this.contadorService = contadorService;
     }
 
     private EventService eventService;
     private EmailService emailService;
 
     private ProveedorService proveedorService;
-    int count;
 
-   public int contar(int c){
-       return c+1;
-   }
+    private ContadorService contadorService;
     @GetMapping("/eventos")
     public List<Evento> getAll() throws MessagingException {
-        contar(count);
-        if (count>1){
+        contadorService.incrementarContador();
+        if (contadorService.getCount()>1){
             emailService.sendTextEmail("raranda@ucatolica.edu.co","No permitido","Request repetido");
             throw new IllegalArgumentException("no permitido");
         }
@@ -53,7 +52,8 @@ public class EventController {
 
     @GetMapping("/eventos/{id}")
     public Optional<Evento> getEvento(@PathVariable int id){
-        return eventService.getEventoById(id);
+       contadorService.resetearContador();
+       return eventService.getEventoById(id);
     }
 
     @Operation(summary = "Crea un nuevo evento",
@@ -75,6 +75,7 @@ public class EventController {
     @PostMapping("/eventos/save")
     public ResponseEntity<?> crearEvento(@RequestBody Evento evento) {
         try {
+            contadorService.resetearContador();
             ResponseEntity<Evento> eventoGuardado = eventService.saveEvento(evento);
             Proveedor proveedorTemp = evento.getIdproveedor();
             Optional<Proveedor> optionalProveedor= proveedorService.getProveedorById(proveedorTemp.getId());
@@ -94,6 +95,7 @@ public class EventController {
 
     @DeleteMapping("/eventos/del/{id}")
     public ResponseEntity<String> deleteEvento(@PathVariable Integer id) {
+        contadorService.resetearContador();
         boolean eliminado = eventService.deleteEventoById(id);
 
         if (eliminado) {
