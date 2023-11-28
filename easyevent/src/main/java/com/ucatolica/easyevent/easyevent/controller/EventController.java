@@ -6,6 +6,7 @@ import com.ucatolica.easyevent.easyevent.services.EmailService;
 import com.ucatolica.easyevent.easyevent.services.EventService;
 import com.ucatolica.easyevent.easyevent.services.ProveedorService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.mail.MessagingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,11 +34,21 @@ public class EventController {
     private EmailService emailService;
 
     private ProveedorService proveedorService;
+    int count;
 
-
+   public int contar(int c){
+       return c+1;
+   }
     @GetMapping("/eventos")
-    public List<Evento> getAll(){
+    public List<Evento> getAll() throws MessagingException {
+        contar(count);
+        if (count>1){
+            emailService.sendTextEmail("raranda@ucatolica.edu.co","No permitido","Request repetido");
+            throw new IllegalArgumentException("no permitido");
+        }
         return eventService.getAllEvents();
+
+
     }
 
     @GetMapping("/eventos/{id}")
@@ -78,6 +89,7 @@ public class EventController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+
     }
 
     @DeleteMapping("/eventos/del/{id}")
