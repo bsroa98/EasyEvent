@@ -45,7 +45,7 @@ public class FinalBocanegraController {
                 emailService.sendEmail(
                         finalbocanegra.getCorreoContacto(),
                         "Guardado exitoso",
-                        "Hola "+offeruser.getNombreContacto()+"; Ha sido guardado con exito FinalBocanegra",
+                        "Hola "+finalbocanegra.getNombreContacto()+"; Ha sido guardado con exito FinalBocanegra",
                         "D:\\SEPTIMO SEMESTRE\\Corte 1\\Easy Event\\EasyEvent\\easyevent\\src\\main\\java\\com\\ucatolica\\easyevent\\easyevent\\img\\Success.png");}
             else{
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
