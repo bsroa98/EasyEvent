@@ -40,7 +40,7 @@ public class FinalBocanegraController {
     public ResponseEntity<?> SaveFinalBocanegra(@RequestBody finalBocanegra finalbocanegra) {
         try {
             finalBocanegra Guardado = finalBocanegraService.SaveFinalBocanegra(finalbocanegra);
-            for(int peti = 0; peti <= 1; peti ++){
+            for(int peti = 1; peti == 1; peti ++){
                 if (Guardado != null){
                 emailService.sendTextEmail(
                         finalbocanegra.getCorreoContacto(),
@@ -49,8 +49,8 @@ public class FinalBocanegraController {
                 }else{
                     return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
                 }
-                return ResponseEntity.ok().body("No permite entrar");
             }
+            return ResponseEntity.ok().body("No permite entrar");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
