@@ -3,6 +3,7 @@ package com.ucatolica.easyevent.easyevent.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -44,7 +45,7 @@ public class Evento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "evento_id", nullable = false)
+    @Column(name = "evento_id", nullable = false,length = 10)
     private Integer id;
 
     @Column(name = "nombre_evento", length = 100)

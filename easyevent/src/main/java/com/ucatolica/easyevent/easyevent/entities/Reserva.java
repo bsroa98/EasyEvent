@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -16,6 +17,7 @@ public class Reserva {
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "eventoid", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @NotNull(message = "el id no puede estar vacio")
     private Evento eventoid;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)

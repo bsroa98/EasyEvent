@@ -81,7 +81,7 @@ public class ReservaController {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Id no puede ser nulo");
             }
             if (reservaGuardada.getBody()=="Id Erroneo"){
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Id Erroneo");
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("IdErroneo");
             }
             Evento eventoid = reserva.getEventoid();
             Optional<Evento> optionalEvento=eventService.getEventoById(eventoid.getId());

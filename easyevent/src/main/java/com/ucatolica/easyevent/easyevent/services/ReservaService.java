@@ -41,6 +41,9 @@ public class ReservaService {
         if (eventoid==null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id Nulo");
         }
+        if (reserva.getEventoid().getId().toString().length()>10){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("IdErroneo");
+        }
         Optional<Evento> optionalEvento=eventService.getEventoById(eventoid.getId());
         Cliente clienteid = reserva.getClienteid();
         Optional<Cliente> optionalCliente=clientService.getClienteById(clienteid.getId());
