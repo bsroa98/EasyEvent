@@ -20,10 +20,14 @@ D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\uca
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\repositories\ProveedorRepository.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\services\OfferUserService.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\security\WebSecurityConfig.java
+D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\security\JsonRequestFilter.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\repositories\EventoRepository.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\controller\EventController.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\repositories\offerUserCrudRepository.java
+D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\ExceptionHandler\GlobalExceptionHandler.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\repositories\RolRepository.java
+D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\ExceptionHandler\BadRequestException.java
+D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\ExceptionHandler\ForbiddenException.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\repositories\LogEntityRepository.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\services\ExceptionLogService.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\repositories\ReservaRepository.java
@@ -37,9 +41,11 @@ D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\uca
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\security\services\UserDetailsImpl.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\controller\ExceptionLogController.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\services\ReservaService.java
+D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\ExceptionHandler\ErrorResponse.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\services\LogService.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\services\ProveedorService.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\entities\LogEntity.java
+D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\ExceptionHandler\ResourceNotFoundException.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\security\jwt\AuthEntryPointJwt.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\repositories\ClienteCrudRepository.java
 D:\SEPTIMO SEMESTRE\Corte 1\Easy Event\EasyEvent\easyevent\src\main\java\com\ucatolica\easyevent\easyevent\repositories\ProveedorCrudRepository.java

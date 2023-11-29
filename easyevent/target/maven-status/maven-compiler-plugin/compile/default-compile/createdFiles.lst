@@ -1,5 +1,6 @@
 com\ucatolica\easyevent\easyevent\entities\Reserva.class
 com\ucatolica\easyevent\easyevent\entities\Proveedor.class
+com\ucatolica\easyevent\easyevent\security\JsonRequestFilter.class
 com\ucatolica\easyevent\easyevent\security\WebSecurityConfig.class
 com\ucatolica\easyevent\easyevent\repositories\offerUserCrudRepository.class
 com\ucatolica\easyevent\easyevent\repositories\ClienteRepository.class

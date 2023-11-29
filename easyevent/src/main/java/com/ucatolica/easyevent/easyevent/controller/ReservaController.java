@@ -48,7 +48,7 @@ public class ReservaController {
         try {
             Optional<Reserva> reservaOptional= reservaService.getReservaById(id);
             if (reservaOptional.isPresent()){
-            return ResponseEntity.status(HttpStatus.CREATED).body(reservaOptional.get());
+            return ResponseEntity.status(HttpStatus.OK).body(reservaOptional.get());
             }
             else {
                 throw new ResourceNotFoundException("Reserva no encontrada");

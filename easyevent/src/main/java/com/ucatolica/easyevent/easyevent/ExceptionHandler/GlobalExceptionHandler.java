@@ -32,6 +32,5 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    // Otros métodos @ExceptionHandler para manejar más tipos de excepciones
 
 }
