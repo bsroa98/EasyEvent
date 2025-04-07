@@ -55,26 +55,36 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    // Obtener el usuario directamente de la base de datos para verificar
+    Optional<Cliente> clienteOpt = clienteRepository.findByUsername(loginRequest.getUsername());
+    if (clienteOpt.isPresent()) {
+        Cliente cliente = clienteOpt.get();
+        System.out.println("Roles del usuario en BD: " + 
+            cliente.getRoles().stream()
+                .map(rol -> rol.getName().toString())
+                .collect(Collectors.joining(", ")));
+    }
 
-        Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+    Authentication authentication = authenticationManager
+            .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+    SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        System.out.println("password:"+loginRequest.getPassword());
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+    ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
 
+    List<String> roles = userDetails.getAuthorities().stream()
+            .map(item -> item.getAuthority())
+            .collect(Collectors.toList());
+    
+    // Imprimir los roles para verificar
+    System.out.println("Roles en UserDetails después de autenticación: " + roles);
 
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .body(new UserInfoResponse(userDetails.getId(),
-                        userDetails.getUsername(),
-                        userDetails.getEmail(),
-                        roles));
+    return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+            .body(new UserInfoResponse(userDetails.getId(),
+                    userDetails.getUsername(),
+                    userDetails.getEmail(),
+                    roles));
     }
 
     @PostMapping("/signup")
@@ -160,5 +170,12 @@ public class AuthController {
         else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not found");
         }
+    }
+
+    @GetMapping("/getrol/{id}")
+    public Set<?> getRol(@PathVariable long id){
+        Optional<Cliente> clienteOptional = clienteRepository.findById(id);
+        Cliente cliente = clienteOptional.get();
+        return cliente.getRoles();
     }
 }
