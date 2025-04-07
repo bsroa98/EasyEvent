@@ -41,11 +41,11 @@ public class EventController {
     private ContadorService contadorService;
     @GetMapping("/eventos")
     public List<Evento> getAll() throws MessagingException {
-        contadorService.incrementarContador();
-        if (contadorService.getCount()>1){
-            emailService.sendTextEmail("raranda@ucatolica.edu.co","No permitido","Request repetido");
-            throw new IllegalArgumentException("no permitido");
-        }
+        //contadorService.incrementarContador();
+        //if (contadorService.getCount()>1){
+        //    emailService.sendTextEmail("raranda@ucatolica.edu.co","No //permitido","Request repetido");
+        //    throw new IllegalArgumentException("no permitido");
+        //}
         return eventService.getAllEvents();
 
 
