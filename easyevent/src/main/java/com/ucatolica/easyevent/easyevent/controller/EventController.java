@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Tag(name="event", description = "Esta API gestiona las operaciones sobre la entidad Evento")
+@RequestMapping("/public")
 @RestController
 public class EventController {
 
