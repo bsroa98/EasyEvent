@@ -50,7 +50,7 @@ public class JwtUtils {
     }
 
     public ResponseCookie getCleanJwtCookie() {
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/").build();
+        ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/").sameSite("none").secure(true).httpOnly(true).build();
         return cookie;
     }
 
