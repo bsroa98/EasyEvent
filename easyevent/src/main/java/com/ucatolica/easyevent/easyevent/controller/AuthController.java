@@ -31,7 +31,7 @@ import com.ucatolica.easyevent.easyevent.repositories.ClienteRepository;
 import com.ucatolica.easyevent.easyevent.security.jwt.JwtUtils;
 import com.ucatolica.easyevent.easyevent.security.services.UserDetailsImpl;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://127.0.0.1:5500", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -168,4 +168,29 @@ public class AuthController {
         Cliente cliente = clienteOptional.get();
         return cliente.getRoles();
     }
+
+    @GetMapping("/userinfo")
+    public ResponseEntity<?> getUserInfo() {
+        Authentication authentication = SecurityContextHolder.getContext().     getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
+        }
+
+    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+    List<String> roles = userDetails.getAuthorities().stream()
+            .map(item -> item.getAuthority())
+            .collect(Collectors.toList());
+
+    return ResponseEntity.ok(new UserInfoResponse(
+            userDetails.getId(),
+            userDetails.getUsername(),
+            userDetails.getEmail(),
+            roles
+    ));
+    }
+
 }
+
+
