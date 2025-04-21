@@ -32,5 +32,11 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ErrorResponse> handleUnauthorizedException(UnauthorizedException ex) {
+        ErrorResponse errorResponse = new ErrorResponse("No autorizado", ex.getMessage(), "Autenticación requerida");
+        return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
+}
+
 
 }

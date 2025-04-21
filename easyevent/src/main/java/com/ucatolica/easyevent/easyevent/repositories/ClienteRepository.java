@@ -7,10 +7,13 @@ import com.ucatolica.easyevent.easyevent.entities.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+    
     Optional<Cliente> findByUsername(String nombre);
 
     Boolean existsByUsername(String username);
 
     Boolean existsByCorreo(String correo);
+
+    
 }
 

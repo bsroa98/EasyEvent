@@ -7,8 +7,12 @@ import org.springframework.data.repository.query.Param;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface ReservaCrudRepository extends CrudRepository<Reserva,Integer> {
     @Query("SELECT COUNT(r) FROM Reserva r WHERE r.fechaEvento = :fechaevento")
     int countFechas(@Param("fechaevento") LocalDateTime fechaevento);
+
+    @Query("SELECT r FROM Reserva r WHERE r.clienteid.id = :clienteId")
+    List<Reserva> findByClienteId(@Param("clienteId") Integer clienteId);
 }

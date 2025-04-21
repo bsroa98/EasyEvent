@@ -20,6 +20,8 @@ public class ClienteRepositorySer implements Serializable {
 
     public Optional<Cliente> getCliente(int id){return clienteCrudRepository.findById(id);}
 
+    public Optional<Cliente> getClienteByUsername(String username){return clienteCrudRepository.findByUsername(username);}
+
     public Cliente save(Cliente cliente){return clienteCrudRepository.save(cliente);}
 
     public void delete(Cliente cliente){clienteCrudRepository.delete(cliente);}

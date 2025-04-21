@@ -35,6 +35,10 @@ public class ClientService {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCliente);
     }
 
+    public Optional<Cliente> getClienteByUsername(String username) {
+        return clienteRepositorySer.getClienteByUsername(username);
+    }
+
     public void deleteCliente(Cliente cliente){
         clienteRepositorySer.delete(cliente);
     }

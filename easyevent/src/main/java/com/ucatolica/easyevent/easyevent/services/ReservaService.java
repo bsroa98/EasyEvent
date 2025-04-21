@@ -95,4 +95,7 @@ public class ReservaService {
             return false;
         }
     }
+    public List<Reserva> getReservasByClienteId(Integer clienteId) {
+        return reservaRepository.getReservasByClienteId(clienteId);
+    }
 }

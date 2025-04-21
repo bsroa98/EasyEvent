@@ -24,5 +24,9 @@ public class ReservaRepository implements Serializable {
 
     public void delete(Reserva reserva){reservaCrudRepository.delete(reserva);}
 
+    public List<Reserva> getReservasByClienteId(Integer clienteId) {
+        return reservaCrudRepository.findByClienteId(clienteId);
+    }
+
 
 }

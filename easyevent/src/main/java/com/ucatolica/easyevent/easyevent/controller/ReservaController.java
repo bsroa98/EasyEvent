@@ -5,15 +5,19 @@ import com.ucatolica.easyevent.easyevent.entities.Cliente;
 import com.ucatolica.easyevent.easyevent.entities.Evento;
 import com.ucatolica.easyevent.easyevent.entities.Reserva;
 import com.ucatolica.easyevent.easyevent.services.*;
+import com.ucatolica.easyevent.easyevent.security.jwt.JwtUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,6 +43,8 @@ public class ReservaController {
     private ClientService clientService;
     @Autowired
     private GlobalExceptionHandler globalExceptionHandler;
+    @Autowired
+    private JwtUtils jwtUtils;
 
     @GetMapping("/reservas")
     public List<Reserva> getALl(){return reservaService.getAllReserva();}
@@ -137,7 +143,47 @@ public class ReservaController {
         }
     }
 
-
+    @GetMapping("/reservas/mis-reservas")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<?> getMisReservas(HttpServletRequest request) {
+        try {
+            // Extraer token y obtener username
+            String jwt = jwtUtils.getJwtFromCookies(request);
+            if (jwt == null) {
+                throw new UnauthorizedException("Token no proporcionado");
+            }
+            
+            if (!jwtUtils.validateJwtToken(jwt)) {
+                throw new UnauthorizedException("Token inválido o expirado");
+            }
+            
+            String username = jwtUtils.getUserNameFromJwtToken(jwt);
+            
+            // Obtener cliente por username
+            Optional<Cliente> clienteOptional = clientService.getClienteByUsername(username);
+            
+            if (!clienteOptional.isPresent()) {
+                throw new ResourceNotFoundException("Cliente no encontrado");
+            }
+            
+            Cliente cliente = clienteOptional.get();
+            Integer clienteId = cliente.getId();
+            
+            // Obtener las reservas del cliente
+            List<Reserva> reservas = reservaService.getReservasByClienteId(clienteId);
+            
+            return ResponseEntity.status(HttpStatus.OK).body(reservas);
+        } catch (UnauthorizedException ex) {
+            ResponseEntity<ErrorResponse> errorResponse = globalExceptionHandler.handleUnauthorizedException(ex);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+        } catch (ResourceNotFoundException ex) {
+            ResponseEntity<ErrorResponse> errorResponse = globalExceptionHandler.handleResourceNotFoundException(ex);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        } catch (Exception ex) {
+            ResponseEntity<ErrorResponse> errorResponse = globalExceptionHandler.handleGenericException(ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+}
 
 
 }
