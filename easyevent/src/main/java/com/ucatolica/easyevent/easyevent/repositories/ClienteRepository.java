@@ -1,4 +1,5 @@
 package com.ucatolica.easyevent.easyevent.repositories;
+import java.lang.foreign.Linker.Option;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     Boolean existsByUsername(String username);
 
     Boolean existsByCorreo(String correo);
+
+    Optional<Cliente> findByCorreo(String correo);
 
     
 }

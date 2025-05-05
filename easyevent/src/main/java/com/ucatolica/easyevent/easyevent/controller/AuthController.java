@@ -2,11 +2,14 @@ package com.ucatolica.easyevent.easyevent.controller;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.ucatolica.easyevent.easyevent.services.EmailService;
+import com.ucatolica.easyevent.easyevent.services.GoogleAuthService;
+
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 
@@ -19,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.ucatolica.easyevent.easyevent.entities.Cliente;
 import com.ucatolica.easyevent.easyevent.entities.Rol;
 import com.ucatolica.easyevent.easyevent.entities.Erol;
@@ -52,6 +56,9 @@ public class AuthController {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    GoogleAuthService googleAuthService;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -190,6 +197,60 @@ public class AuthController {
             roles
     ));
     }
+
+    @PostMapping("/google")
+    public ResponseEntity<?> authenticateWithGoogle(@RequestBody Map<String, String> body) {
+    String idToken = body.get("idToken");
+    if (idToken == null || idToken.isEmpty()) {
+        return ResponseEntity.badRequest().body("Falta el token de Google");
+    }
+
+    GoogleIdToken.Payload payload = googleAuthService.verifyGoogleToken(idToken);
+    if (payload == null) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token de Google inválido");
+    }
+
+    String email = payload.getEmail();
+    String name = (String) payload.get("name");
+    String username = email.split("@")[0];
+
+    // Buscar usuario por correo
+    Cliente cliente = clienteRepository.findByCorreo(email).orElse(null);
+
+    // Si no existe, crear uno nuevo
+    if (cliente == null) {
+        cliente = new Cliente();
+        cliente.setCorreo(email);
+        cliente.setNombre(name);
+        cliente.setUsername(username);
+        cliente.setPass(encoder.encode("google-auth")); // Contraseña dummy
+        cliente.setVerificado(); // Lo marcas como verificado directamente
+
+        Rol userRole = rolRepository.findByName(Erol.ROLE_USER)
+                .orElseThrow(() -> new RuntimeException("Error: Rol USER no encontrado"));
+        cliente.setRoles(Set.of(userRole));
+
+        clienteRepository.save(cliente);
+    }
+
+    // Construir detalles del usuario y generar cookie JWT
+    UserDetailsImpl userDetails = UserDetailsImpl.build(cliente);
+    ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+
+    List<String> roles = userDetails.getAuthorities().stream()
+            .map(item -> item.getAuthority())
+            .collect(Collectors.toList());
+
+    return ResponseEntity.ok()
+            .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+            .body(new UserInfoResponse(
+                    userDetails.getId(),
+                    userDetails.getUsername(),
+                    userDetails.getEmail(),
+                    roles
+            ));
+}
+
 
 }
 
