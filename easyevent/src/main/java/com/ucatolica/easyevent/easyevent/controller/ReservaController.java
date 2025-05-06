@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Tag(name="reserva", description = "Esta API gestiona las operaciones sobre la entidad Reserva")
+@CrossOrigin(origins = "http://127.0.0.1:5500", maxAge = 3600, allowCredentials = "true")
 @RestController
 public class ReservaController {
     public ReservaController(ReservaService reservaService, EmailService emailService, EventService eventService, ClientService clientService) {
@@ -127,7 +128,8 @@ public class ReservaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
         catch (Exception ex){
-            ResponseEntity<ErrorResponse> errorResponse = globalExceptionHandler.handleGenericException(ex);
+            ResponseEntity<ErrorResponse> errorResponse = 
+            globalExceptionHandler.handleGenericException(ex);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
 
